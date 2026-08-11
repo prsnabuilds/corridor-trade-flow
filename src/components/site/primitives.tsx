@@ -45,7 +45,7 @@ export function Reveal({
 export function Eyebrow({ children, tone = "dark" }: { children: ReactNode; tone?: "dark" | "light" }) {
   return (
     <p
-      className={`font-display text-[0.7rem] uppercase tracking-[0.24em] ${
+      className={`font-display text-[0.72rem] uppercase tracking-[0.02em] ${
         tone === "dark" ? "text-muted-foreground" : "text-ink/50"
       }`}
     >
