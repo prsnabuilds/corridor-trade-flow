@@ -1,0 +1,40 @@
+import logo from "@/assets/logo.png.asset.json";
+
+const links = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Book a Demo", href: "#book-a-demo" },
+  { label: "Privacy", href: "#top" },
+  { label: "Contact", href: "#book-a-demo" },
+];
+
+export function Footer() {
+  return (
+    <footer className="border-t border-border px-6 py-14">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 md:flex-row md:items-start md:justify-between">
+        <div className="max-w-sm">
+          <img src={logo.url} alt="Corridor One X" className="h-6 w-auto" />
+          <p className="mt-5 font-sans text-sm leading-relaxed text-muted-foreground">
+            Corridor One X — Next-generation trade infrastructure for India &amp; the Gulf.
+          </p>
+        </div>
+        <ul className="flex flex-wrap gap-x-8 gap-y-3">
+          {links.map((l) => (
+            <li key={l.label}>
+              <a
+                href={l.href}
+                className="font-sans text-sm text-secondary-foreground transition-colors hover:text-accent"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="mx-auto mt-12 w-full max-w-6xl border-t border-border pt-6">
+        <p className="font-sans text-xs text-muted-foreground">
+          © 2026 Corridor One X. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+}
