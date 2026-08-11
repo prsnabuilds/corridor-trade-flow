@@ -13,9 +13,9 @@ import { Faq } from "@/components/site/Faq";
 import { FinalCta } from "@/components/site/FinalCta";
 import { Footer } from "@/components/site/Footer";
 
-const title = "Corridor One X — Verified Commodity Trade Infrastructure";
+const title = "Corridor One X: Verified Commodity Trade Infrastructure";
 const description =
-  "Corridor One X connects verified producers, exporters, and importers directly — AI matching, autonomous settlement, and escrow-secured payment across the India–Gulf corridor.";
+  "Corridor One X connects verified producers, exporters, and importers directly. AI matching, autonomous settlement, and escrow-secured payment across the India-Gulf corridor.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

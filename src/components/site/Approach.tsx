@@ -21,7 +21,7 @@ export function Approach() {
             Corridor One X does not digitise the old way of trading. It replaces it. Identity is verified before any
             deal begins. Counterparties are matched by AI across commodity, volume, corridor, and trust history.
             Terms are locked in a signed Letter of Intent. Payment is held in escrow and released only on confirmed
-            delivery — all executed through the platform, without a chain of unverified hands.
+            delivery. All of it executes through the platform, without a chain of unverified hands.
           </p>
         </Reveal>
       </div>

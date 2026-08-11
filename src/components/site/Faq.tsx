@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Which commodities and corridors do you support?",
-    a: "Agriculture, food, crude oil, and minerals. India–Gulf corridors are live now.",
+    a: "Agriculture, food, crude oil, and minerals. India-Gulf corridors are live now.",
   },
   {
     q: "What does it cost?",

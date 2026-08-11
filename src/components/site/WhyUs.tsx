@@ -2,7 +2,7 @@ import { Eyebrow, Reveal, Section } from "./primitives";
 
 const advantages = [
   "AI-verified matching network",
-  "Trust Score 0–1000 per trader",
+  "Trust Score 0 to 1000 per trader",
   "Identity protected until escrow funds",
   "Proprietary closed-deal intelligence",
   "Document verification at every step",
@@ -22,7 +22,7 @@ export function WhyUs() {
 
       <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <h3 className="font-display text-sm uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="font-display text-sm uppercase tracking-[0.02em] text-muted-foreground">
             What only we have
           </h3>
           <ul className="mt-6 divide-y divide-border border-y border-border">
@@ -36,11 +36,11 @@ export function WhyUs() {
         </Reveal>
 
         <Reveal delay={120}>
-          <h3 className="font-display text-sm uppercase tracking-[0.2em] text-muted-foreground">
+          <h3 className="font-display text-sm uppercase tracking-[0.02em] text-muted-foreground">
             The data flywheel
           </h3>
           <p className="mt-6 font-sans text-base leading-relaxed text-secondary-foreground">
-            Every closed deal generates a verified, closed-loop data point no public database holds — counterparty
+            Every closed deal generates a verified, closed-loop data point no public database holds: counterparty
             reliability, commodity grade accuracy, price benchmark, logistics outcome, payment behaviour. By deal
             500, Corridor One X holds the most valuable proprietary commodity intelligence dataset in the corridor.
             By deal 5,000, no competitor can enter.

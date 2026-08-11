@@ -1,10 +1,13 @@
 import { Ship, Plane, Truck } from "lucide-react";
 import { Eyebrow, Reveal, Section } from "./primitives";
+import seaImg from "@/assets/freight-sea.jpg";
+import airImg from "@/assets/freight-air.jpg";
+import roadImg from "@/assets/freight-road.jpg";
 
 const modes = [
-  { icon: Ship, title: "Seaways", body: "Bulk port-to-port shipping." },
-  { icon: Plane, title: "Airways", body: "Air freight for time-sensitive cargo." },
-  { icon: Truck, title: "Roadways", body: "Overland and last-mile transport." },
+  { icon: Ship, title: "Seaways", body: "Bulk port-to-port shipping.", img: seaImg, alt: "Container ship at sea in fog" },
+  { icon: Plane, title: "Airways", body: "Air freight for time-sensitive cargo.", img: airImg, alt: "Cargo aircraft loading at night" },
+  { icon: Truck, title: "Roadways", body: "Overland and last-mile transport.", img: roadImg, alt: "Freight trucks on a highway at night" },
 ];
 
 export function Logistics() {
@@ -19,7 +22,7 @@ export function Logistics() {
             </h2>
             <p className="mt-7 font-sans text-base leading-relaxed text-secondary-foreground">
               Commodities move by sea, by air, and by road. Corridor One X tracks the shipment across whichever mode
-              fits the commodity, the volume, and the timeline — and holds escrow until delivery is confirmed.
+              fits the commodity, the volume, and the timeline, and holds escrow until delivery is confirmed.
             </p>
           </Reveal>
         </div>
@@ -27,10 +30,26 @@ export function Logistics() {
         <div className="mt-16 grid gap-4 md:grid-cols-3">
           {modes.map((m, i) => (
             <Reveal key={m.title} delay={i * 90}>
-              <div className="h-full rounded-lg border border-border bg-card/70 p-7 transition-colors hover:border-accent/40 hover:bg-elevated">
-                <m.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
-                <h3 className="mt-6 font-display text-lg font-medium tracking-tight text-foreground">{m.title}</h3>
-                <p className="mt-2 font-sans text-sm text-muted-foreground">{m.body}</p>
+              <div className="group h-full overflow-hidden rounded-lg border border-border bg-card/70 transition-colors hover:border-accent/40 hover:bg-elevated">
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={m.img}
+                    alt={m.alt}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="h-full w-full object-cover opacity-65 transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent"
+                  />
+                </div>
+                <div className="p-7">
+                  <m.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
+                  <h3 className="mt-6 font-display text-lg font-medium tracking-tight text-foreground">{m.title}</h3>
+                  <p className="mt-2 font-sans text-sm text-muted-foreground">{m.body}</p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -42,15 +61,15 @@ export function Logistics() {
               <span className="text-muted-foreground">Active corridors</span>
               <span className="flex items-center gap-2">
                 <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India → UAE
+                India to UAE
               </span>
               <span className="flex items-center gap-2">
                 <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India → Oman
+                India to Oman
               </span>
               <span className="flex items-center gap-2">
                 <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India → Saudi Arabia
+                India to Saudi Arabia
               </span>
             </div>
             <p className="font-sans text-sm text-muted-foreground">

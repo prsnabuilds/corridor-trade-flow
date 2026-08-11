@@ -1,8 +1,26 @@
 import { Reveal } from "./primitives";
+import ctaPoster from "@/assets/hero-port.jpg";
+import ctaVideo from "@/assets/hero-loop.mp4.asset.json";
 
 export function FinalCta() {
   return (
     <section id="book-a-demo" className="corridor-glow relative overflow-hidden px-6 py-32 md:py-44">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <video
+          className="h-full w-full object-cover opacity-35"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          poster={ctaPoster}
+        >
+          <source src={ctaVideo.url} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+      </div>
+
       <div className="mx-auto w-full max-w-3xl text-center">
         <Reveal>
           <h2 className="font-display text-4xl leading-[1.05] font-medium tracking-[-0.035em] text-foreground md:text-5xl lg:text-6xl">

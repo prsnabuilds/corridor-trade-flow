@@ -29,7 +29,7 @@ const steps = [
   {
     n: "06",
     title: "Shipped & Verified",
-    body: "Shipping documents verified. Logistics tracked across the route the goods move — sea, air, or road.",
+    body: "Shipping documents verified. Logistics tracked across the route the goods move: sea, air, or road.",
   },
   {
     n: "07",
@@ -58,7 +58,7 @@ export function DealFlow() {
                 aria-hidden
                 className="absolute top-[2.6rem] -left-[4.5px] h-2 w-2 rounded-full bg-border transition-colors group-hover:bg-accent"
               />
-              <span className="font-display text-sm tracking-[0.2em] text-accent">{s.n}</span>
+              <span className="font-display text-sm tracking-[0.02em] text-accent">{s.n}</span>
               <h3 className="font-display text-xl font-medium tracking-tight text-foreground">{s.title}</h3>
               <p className="font-sans text-sm leading-relaxed text-secondary-foreground">{s.body}</p>
             </li>
