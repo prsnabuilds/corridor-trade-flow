@@ -2,13 +2,13 @@ import { Eyebrow, Reveal } from "./primitives";
 
 const columns = [
   {
-    title: "Trust Score (0–1000)",
+    title: "Trust Score (0 to 1000)",
     body: "A single number every trader carries, built only from verified, closed-loop signals.",
     items: [
-      "KYC & identity — 30%",
-      "Trade history — 30%",
-      "On-time delivery — 25%",
-      "Dispute rate — 15%",
+      "KYC and identity: 30%",
+      "Trade history: 30%",
+      "On-time delivery: 25%",
+      "Dispute rate: 15%",
     ],
   },
   {
