@@ -1,0 +1,69 @@
+import { Eyebrow, Reveal } from "./primitives";
+
+const audiences = [
+  {
+    label: "Producers",
+    title: "You produced it. Sell it directly.",
+    points: [
+      "If you harvest, extract, or manufacture the commodity yourself, you don't need to be an exporter.",
+      "Reach verified buyers directly, with no trader in between.",
+      "Move low-volume or aging stock before it loses value.",
+    ],
+  },
+  {
+    label: "Exporters",
+    title: "Stop chasing unverified buyers.",
+    points: [
+      "Verified buyers with real intent on record.",
+      "Get paid through escrow before you take on risk.",
+      "Build a Trust Score that travels with you.",
+    ],
+  },
+  {
+    label: "Importers",
+    title: "Stop wiring money into hope.",
+    points: [
+      "Verified suppliers with a proven track record.",
+      "Quality and documents checked before release.",
+      "Funds released only on confirmed delivery.",
+    ],
+  },
+];
+
+export function WhoItsFor() {
+  return (
+    <section id="who-its-for" className="bg-light-surface-alt px-6 py-24 text-ink md:py-32">
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="max-w-3xl">
+          <Reveal>
+            <Eyebrow tone="light">Who It's For</Eyebrow>
+            <h2 className="mt-6 font-display text-3xl leading-[1.1] tracking-[-0.03em] text-ink md:text-4xl lg:text-[2.75rem]">
+              One platform. Three sides of the same deal.
+            </h2>
+          </Reveal>
+        </div>
+
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {audiences.map((a, i) => (
+            <Reveal key={a.label} delay={i * 90}>
+              <div className="h-full rounded-lg border border-ink/12 bg-light-surface p-8 transition-colors hover:border-ink/30">
+                <p className="font-display text-[0.7rem] uppercase tracking-[0.24em] text-ink/45">{a.label}</p>
+                <h3 className="mt-5 font-display text-xl leading-snug font-medium tracking-tight text-ink">
+                  {a.title}
+                </h3>
+                <ul className="mt-6 space-y-3">
+                  {a.points.map((p) => (
+                    <li key={p} className="flex gap-3 font-sans text-sm leading-relaxed text-ink/70">
+                      <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
