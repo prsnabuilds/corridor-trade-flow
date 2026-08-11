@@ -1,8 +1,27 @@
 import { Eyebrow, Reveal } from "./primitives";
+import heroPoster from "@/assets/hero-port.jpg";
+import heroVideo from "@/assets/hero-loop.mp4.asset.json";
 
 export function Hero() {
   return (
     <section id="top" className="corridor-glow relative overflow-hidden px-6 pt-40 pb-28 md:pt-52 md:pb-40">
+      {/* full-bleed ambient corridor footage */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+        <video
+          className="h-full w-full object-cover opacity-45"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster={heroPoster}
+        >
+          <source src={heroVideo.url} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+      </div>
+
       {/* faint corridor arcs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 opacity-[0.18]">
         <svg className="h-full w-full" viewBox="0 0 1200 700" fill="none" preserveAspectRatio="xMidYMax slice">
@@ -35,8 +54,8 @@ export function Hero() {
         </Reveal>
         <Reveal delay={160}>
           <p className="mx-auto mt-8 max-w-2xl font-sans text-base leading-relaxed text-secondary-foreground md:text-lg">
-            Corridor One X connects verified producers, exporters, and importers directly — with AI matching,
-            autonomous settlement, and escrow-secured payment. The deal you agree to is the deal that closes.
+            Corridor One X connects verified producers, exporters, and importers directly. AI matching, autonomous
+            settlement, and escrow-secured payment. The deal you agree to is the deal that closes.
           </p>
         </Reveal>
         <Reveal delay={240}>
@@ -58,7 +77,7 @@ export function Hero() {
         <Reveal delay={320}>
           <p className="mx-auto mt-12 max-w-xl font-sans text-sm leading-relaxed text-muted-foreground">
             Built for traders moving cross-border volume in agriculture, food, crude oil, and minerals across the
-            India–Gulf corridor.
+            India-Gulf corridor.
           </p>
         </Reveal>
       </div>

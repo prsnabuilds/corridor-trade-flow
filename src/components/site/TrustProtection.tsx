@@ -25,7 +25,7 @@ const columns = [
     title: "Escrow & Payment Safety",
     body: "Regulated escrow via Razorpay with segregated accounts.",
     items: [
-      "Milestone-based release (load → ship → deliver)",
+      "Milestone-based release (load, ship, deliver)",
       "Dispute window before final release",
       "Full audit trail",
       "Segregated client accounts",
@@ -39,7 +39,7 @@ export function TrustProtection() {
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-3xl">
           <Reveal>
-            <Eyebrow tone="light">Trust, Verified — Money, Protected</Eyebrow>
+            <Eyebrow tone="light">Trust, Verified. Money, Protected.</Eyebrow>
             <h2 className="mt-6 font-display text-3xl leading-[1.1] tracking-[-0.03em] text-ink md:text-4xl lg:text-[2.75rem]">
               Every counterparty verified. Every rupee in escrow.
             </h2>
