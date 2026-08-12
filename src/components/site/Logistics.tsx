@@ -89,7 +89,7 @@ export function Logistics() {
         <Reveal delay={120}>
           <div className="mt-12 grid items-center gap-10 rounded-lg border border-border bg-card/40 p-7 md:grid-cols-2">
             <div className="mx-auto w-full max-w-sm">
-              <GlobePulse markers={corridorMarkers} speed={0.0022} />
+              <GlobePulse markers={corridorMarkers} speed={0.0022} initialPhi={4.3} />
             </div>
             <div>
               <p className="font-display text-sm tracking-[0.02em] text-muted-foreground uppercase">

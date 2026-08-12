@@ -12,6 +12,7 @@ interface GlobePulseProps {
   markers?: PulseMarker[];
   className?: string;
   speed?: number;
+  initialPhi?: number;
 }
 
 const defaultMarkers: PulseMarker[] = [
@@ -19,7 +20,12 @@ const defaultMarkers: PulseMarker[] = [
   { id: "pulse-2", location: [40.71, -74.01], delay: 0.5 },
 ];
 
-export function GlobePulse({ markers = defaultMarkers, className = "", speed = 0.003 }: GlobePulseProps) {
+export function GlobePulse({
+  markers = defaultMarkers,
+  className = "",
+  speed = 0.003,
+  initialPhi = 0,
+}: GlobePulseProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
   const dragOffset = useRef({ phi: 0, theta: 0 });
@@ -66,7 +72,7 @@ export function GlobePulse({ markers = defaultMarkers, className = "", speed = 0
     if (!canvas) return;
     let globe: { update: (s: Record<string, number>) => void; destroy: () => void } | null = null;
     let animationId = 0;
-    let phi = 0;
+    let phi = initialPhi;
 
     function init() {
       if (!canvas) return;
@@ -77,7 +83,7 @@ export function GlobePulse({ markers = defaultMarkers, className = "", speed = 0
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
         width: width * 2,
         height: width * 2,
-        phi: 0,
+        phi: initialPhi,
         theta: 0.2,
         dark: 1,
         diffuse: 1.4,
@@ -118,7 +124,7 @@ export function GlobePulse({ markers = defaultMarkers, className = "", speed = 0
       if (animationId) cancelAnimationFrame(animationId);
       if (globe) globe.destroy();
     };
-  }, [markers, speed]);
+  }, [markers, speed, initialPhi]);
 
   return (
     <div className={`relative aspect-square w-full ${className}`}>
