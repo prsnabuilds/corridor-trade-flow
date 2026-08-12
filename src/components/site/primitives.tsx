@@ -265,7 +265,7 @@ export function ParallaxImage({
       window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [speed]);
+  }, [speed, scale]);
 
   return (
     <div ref={ref} className={`relative overflow-hidden bg-background ${className}`}>
