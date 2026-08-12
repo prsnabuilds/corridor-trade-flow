@@ -134,7 +134,7 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
             return (
               <div
                 key={item.id}
-                className="absolute left-0 top-0 cursor-pointer transition-all duration-700"
+                className="absolute left-1/2 top-1/2 cursor-pointer transition-all duration-700"
                 style={{
                   transform: `translate(${position.x}px, ${position.y}px)`,
                   zIndex: isExpanded ? 300 : position.zIndex,
