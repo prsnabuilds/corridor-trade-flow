@@ -108,13 +108,13 @@ export function WhoItsFor() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <Parallax speed={-0.06} className="mt-16 grid gap-6 md:grid-cols-3">
           {audiences.map((a, i) => (
             <Reveal key={a.label} delay={i * 130}>
               <TiltCard a={a} />
             </Reveal>
           ))}
-        </div>
+        </Parallax>
       </div>
     </section>
   );

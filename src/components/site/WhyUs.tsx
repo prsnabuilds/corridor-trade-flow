@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section, useCountUp, useInView } from "./primitives";
+import { Eyebrow, Parallax, ParallaxGlow, Reveal, Section, useCountUp, useInView } from "./primitives";
 
 const advantages = [
   "AI-verified matching network",
