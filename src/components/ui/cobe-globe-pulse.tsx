@@ -119,14 +119,19 @@ export function GlobePulse({
         glowColor: [0.16, 0.18, 0.12],
         markers: markers.map((m) => ({ location: m.location, size: 0.035 })),
         opacity: 0.95,
+        onRender: (state: Record<string, number>) => {
+          if (!isPausedRef.current) phi += speed;
+          const p = phi + phiOffsetRef.current + dragOffset.current.phi;
+          const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
+          state.phi = p;
+          state.theta = t;
+          state.width = (canvas!.offsetWidth || 400) * 2;
+          state.height = (canvas!.offsetWidth || 400) * 2;
+          positionOverlay(p, t);
+        },
       } as never) as never;
 
       function animate() {
-        if (!isPausedRef.current) phi += speed;
-        const p = phi + phiOffsetRef.current + dragOffset.current.phi;
-        const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
-        globe!.update({ phi: p, theta: t });
-        positionOverlay(p, t);
         animationId = requestAnimationFrame(animate);
       }
       animate();
