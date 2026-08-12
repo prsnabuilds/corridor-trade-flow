@@ -11,7 +11,7 @@ function Frame({ children }: { children: React.ReactNode }) {
     <svg
       viewBox="0 0 220 150"
       fill="none"
-      className="h-[150px] w-full text-muted-foreground"
+      className="h-[190px] w-full text-muted-foreground"
       aria-hidden="true"
     >
       {children}
