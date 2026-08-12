@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/c1x-hero-bg.png.asset.json";
+import heroBg from "@/assets/c1x-hero-bg.png";
 
 function XMark({ className = "" }: { className?: string }) {
   return (
@@ -80,7 +80,7 @@ export function Hero() {
         }}
       >
         <img
-          src={heroBg.url}
+          src={heroBg}
           alt=""
           className="h-full w-full object-cover object-right"
           fetchPriority="high"

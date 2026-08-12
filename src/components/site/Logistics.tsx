@@ -1,13 +1,10 @@
 import { Ship, Plane, Truck } from "lucide-react";
 import { Eyebrow, ParallaxGlow, ParallaxImage, Parallax, Reveal, Section } from "./primitives";
 import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
-import seaAsset from "@/assets/freight-sea.png.asset.json";
-import airAsset from "@/assets/freight-air.png.asset.json";
-import roadAsset from "@/assets/freight-road.png.asset.json";
+import seaImg from "@/assets/freight-sea.png";
+import airImg from "@/assets/freight-air.png";
+import roadImg from "@/assets/freight-road.png";
 
-const seaImg = seaAsset.url;
-const airImg = airAsset.url;
-const roadImg = roadAsset.url;
 
 const modes = [
   {

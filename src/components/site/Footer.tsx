@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 const links = [
   { label: "How It Works", href: "#how-it-works" },
@@ -12,7 +12,7 @@ export function Footer() {
     <footer className="border-t border-border px-6 py-14">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 md:flex-row md:items-start md:justify-between">
         <div className="max-w-sm">
-          <img src={logo.url} alt="Corridor One X" className="h-6 w-auto" />
+          <img src={logo} alt="Corridor One X" className="h-6 w-auto" />
           <p className="mt-5 font-sans text-sm leading-relaxed text-muted-foreground">
             Corridor One X. Next-generation trade infrastructure for India &amp; the Gulf.
           </p>
