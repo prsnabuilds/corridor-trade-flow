@@ -167,3 +167,90 @@
 @utility marquee-track {
   animation: marquee 42s linear infinite;
 }
+
+/* ---------- motion ---------- */
+
+@keyframes glow-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(0, -3%, 0) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes corridor-stream {
+  from {
+    transform: translate3d(0, 12%, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0.35;
+  }
+  to {
+    transform: translate3d(0, -120%, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes dash-travel {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@utility glow-animate {
+  &::before {
+    animation: glow-drift 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform, opacity;
+  }
+}
+
+@utility corridor-particle {
+  animation: corridor-stream 11s linear infinite;
+  will-change: transform, opacity;
+}
+
+@utility word-rise {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: word-rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes word-rise-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .corridor-particle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .word-rise {
+    opacity: 1;
+    transform: none;
+  }
+}
