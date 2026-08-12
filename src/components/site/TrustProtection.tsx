@@ -1,16 +1,13 @@
-import { Eyebrow, Reveal } from "./primitives";
+import { Eyebrow, Reveal, useCountUp, useInView } from "./primitives";
+
+const breakdown = [
+  { label: "KYC and identity", value: 30 },
+  { label: "Trade history", value: 30 },
+  { label: "On-time delivery", value: 25 },
+  { label: "Dispute rate", value: 15 },
+];
 
 const columns = [
-  {
-    title: "Trust Score (0 to 1000)",
-    body: "A single number every trader carries, built only from verified, closed-loop signals.",
-    items: [
-      "KYC and identity: 30%",
-      "Trade history: 30%",
-      "On-time delivery: 25%",
-      "Dispute rate: 15%",
-    ],
-  },
   {
     title: "Verification",
     body: "Every counterparty cleared before they can transact.",
@@ -23,7 +20,7 @@ const columns = [
   },
   {
     title: "Escrow & Payment Safety",
-    body: "Regulated escrow via Razorpay with segregated accounts.",
+    body: "Regulated, licensed escrow with segregated accounts.",
     items: [
       "Milestone-based release (load, ship, deliver)",
       "Dispute window before final release",
@@ -32,6 +29,42 @@ const columns = [
     ],
   },
 ];
+
+function TrustScoreCard() {
+  const { ref, inView } = useInView<HTMLDivElement>(0.35);
+  const score = useCountUp(1000, inView, 1800);
+
+  return (
+    <div ref={ref} className="h-full border-t border-ink/15 pt-7">
+      <h3 className="font-display text-xl font-medium tracking-tight text-ink">Trust Score (0 to 1000)</h3>
+      <p className="mt-3 font-sans text-sm leading-relaxed text-ink/65">
+        A single number every trader carries, built only from verified, closed-loop signals.
+      </p>
+      <p className="mt-6 font-display text-5xl leading-none font-medium tracking-[-0.04em] text-ink tabular-nums md:text-6xl">
+        {score}
+      </p>
+      <ul className="mt-6 space-y-4">
+        {breakdown.map((b, i) => (
+          <li key={b.label}>
+            <div className="flex items-baseline justify-between font-sans text-sm text-ink/80">
+              <span>{b.label}</span>
+              <span className="tabular-nums text-ink/60">{b.value}%</span>
+            </div>
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-ink/10">
+              <div
+                className="h-full rounded-full bg-accent"
+                style={{
+                  width: inView ? `${b.value}%` : "0%",
+                  transition: `width 1.1s cubic-bezier(0.16,1,0.3,1) ${i * 120 + 200}ms`,
+                }}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function TrustProtection() {
   return (
@@ -47,8 +80,11 @@ export function TrustProtection() {
         </div>
 
         <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+          <Reveal>
+            <TrustScoreCard />
+          </Reveal>
           {columns.map((c, i) => (
-            <Reveal key={c.title} delay={i * 90}>
+            <Reveal key={c.title} delay={(i + 1) * 120}>
               <div className="h-full border-t border-ink/15 pt-7">
                 <h3 className="font-display text-xl font-medium tracking-tight text-ink">{c.title}</h3>
                 <p className="mt-3 font-sans text-sm leading-relaxed text-ink/65">{c.body}</p>
