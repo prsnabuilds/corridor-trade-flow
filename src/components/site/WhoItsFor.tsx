@@ -67,7 +67,7 @@ function TiltCard({ a }: { a: (typeof audiences)[number] }) {
       <ParallaxImage
         src={a.img}
         alt={a.alt}
-        speed={0.24}
+        speed={0.08}
         scale={1.5}
         width={1024}
         height={1280}

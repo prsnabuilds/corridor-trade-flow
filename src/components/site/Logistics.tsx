@@ -42,7 +42,7 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
         <ParallaxImage
           src={m.img}
           alt={m.alt}
-          speed={0.22}
+          speed={0.07}
           scale={1.5}
           width={1024}
           height={1024}
