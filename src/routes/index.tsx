@@ -35,8 +35,10 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Nav />
-      <div className="sticky top-0 z-0">
-        <Hero />
+      <div className="relative h-screen">
+        <div className="sticky top-0 z-0 h-screen overflow-hidden">
+          <Hero />
+        </div>
       </div>
       <main className="relative z-10 bg-background">
         <Problem />
@@ -50,7 +52,9 @@ function Index() {
         <Faq />
         <FinalCta />
       </main>
-      <Footer />
+      <div className="relative z-10 bg-background">
+        <Footer />
+      </div>
     </div>
   );
 }
