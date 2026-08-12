@@ -125,10 +125,14 @@ export function GlobePulse({
         if (!isPausedRef.current) phi += speed;
         const p = phi + phiOffsetRef.current + dragOffset.current.phi;
         const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
-        globe!.update({ phi: p, theta: t });
-        positionOverlay(p, t);
         (window as unknown as Record<string, number>).__globeFrames =
           ((window as unknown as Record<string, number>).__globeFrames ?? 0) + 1;
+        try {
+          globe!.update({ phi: p, theta: t });
+        } catch (err) {
+          console.error("globe update failed", err);
+        }
+        positionOverlay(p, t);
         animationId = requestAnimationFrame(animate);
       }
       animate();
