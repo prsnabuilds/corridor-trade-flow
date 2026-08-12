@@ -71,6 +71,7 @@ export function GlobePulse({
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    console.log("[globe] effect", !!canvas);
     if (!canvas) return;
     let globe: { update: (s: Record<string, number>) => void; destroy: () => void } | null = null;
     let animationId = 0;
@@ -100,6 +101,7 @@ export function GlobePulse({
     }
 
     function init() {
+      console.log("[globe] init", canvas?.offsetWidth, !!globe);
       if (!canvas) return;
       const width = canvas.offsetWidth;
       if (width === 0 || globe) return;
@@ -135,6 +137,7 @@ export function GlobePulse({
         positionOverlay(p, t);
         animationId = requestAnimationFrame(animate);
       }
+      console.log("[globe] created");
       animate();
       setTimeout(() => canvas && (canvas.style.opacity = "1"));
     }
