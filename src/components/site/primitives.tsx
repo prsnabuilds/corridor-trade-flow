@@ -207,3 +207,100 @@ export function Section({
     </section>
   );
 }
+
+/**
+ * Oversized, always-clipped parallax image.
+ * The image is scaled well beyond its frame so travel never reveals an edge.
+ */
+export function ParallaxImage({
+  src,
+  alt,
+  className = "",
+  imgClassName = "",
+  speed = 0.28,
+  scale = 1.45,
+  children,
+  loading = "lazy",
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  imgClassName?: string;
+  speed?: number;
+  scale?: number;
+  children?: ReactNode;
+  loading?: "lazy" | "eager";
+  width?: number;
+  height?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const center = r.top + r.height / 2 - window.innerHeight / 2;
+      const mobile = window.matchMedia("(max-width: 767px)").matches;
+      setOffset(-center * speed * (mobile ? 0.5 : 1));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
+    compute();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [speed]);
+
+  return (
+    <div ref={ref} className={`relative overflow-hidden bg-background ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading={loading}
+        width={width}
+        height={height}
+        className={`absolute inset-0 h-full w-full object-cover will-change-transform ${imgClassName}`}
+        style={{
+          transform: `translate3d(0, ${offset.toFixed(2)}px, 0) scale(${scale})`,
+        }}
+      />
+      {children}
+    </div>
+  );
+}
+
+/** Absolutely-positioned lime glow layer that drifts at its own scroll speed. */
+export function ParallaxGlow({
+  speed = 0.45,
+  className = "",
+  intensity = 20,
+}: {
+  speed?: number;
+  className?: string;
+  intensity?: number;
+}) {
+  return (
+    <Parallax speed={speed} className={`pointer-events-none absolute inset-0 -z-10 ${className}`}>
+      <div
+        aria-hidden
+        className="h-full w-full"
+        style={{
+          background: `radial-gradient(50% 40% at 50% 55%, color-mix(in oklab, var(--accent) ${intensity}%, transparent) 0%, transparent 72%)`,
+        }}
+      />
+    </Parallax>
+  );
+}
