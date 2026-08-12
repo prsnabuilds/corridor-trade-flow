@@ -4,6 +4,7 @@ import createGlobe from "cobe";
 export interface PulseMarker {
   id: string;
   label?: string;
+  /** [latitude, longitude] */
   location: [number, number];
   delay: number;
 }
@@ -27,6 +28,7 @@ export function GlobePulse({
   initialPhi = 0,
 }: GlobePulseProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
   const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
   const dragOffset = useRef({ phi: 0, theta: 0 });
   const phiOffsetRef = useRef(0);
@@ -74,6 +76,29 @@ export function GlobePulse({
     let animationId = 0;
     let phi = initialPhi;
 
+    function positionOverlay(currentPhi: number, currentTheta: number) {
+      const overlay = overlayRef.current;
+      if (!overlay || !canvas) return;
+      const size = canvas.offsetWidth;
+      const r = size / 2;
+      for (const m of markers) {
+        const el = overlay.querySelector<HTMLElement>(`[data-marker="${m.id}"]`);
+        if (!el) continue;
+        const latRad = (m.location[0] * Math.PI) / 180;
+        const lonRad = (m.location[1] * Math.PI) / 180;
+        // globe space
+        const x0 = Math.cos(latRad) * Math.sin(lonRad + currentPhi - Math.PI / 2);
+        const y0 = Math.sin(latRad);
+        const z0 = Math.cos(latRad) * Math.cos(lonRad + currentPhi - Math.PI / 2);
+        // tilt around x-axis by theta
+        const y1 = y0 * Math.cos(currentTheta) + z0 * Math.sin(currentTheta);
+        const z1 = -y0 * Math.sin(currentTheta) + z0 * Math.cos(currentTheta);
+        const visible = z1 > 0.06;
+        el.style.transform = `translate(-50%, -50%) translate(${r + x0 * r * 0.96}px, ${r - y1 * r * 0.96}px)`;
+        el.style.opacity = visible ? "1" : "0";
+      }
+    }
+
     function init() {
       if (!canvas) return;
       const width = canvas.offsetWidth;
@@ -92,16 +117,16 @@ export function GlobePulse({
         baseColor: [0.28, 0.3, 0.27],
         markerColor: [0.77, 0.85, 0.18],
         glowColor: [0.16, 0.18, 0.12],
-        markers: markers.map((m) => ({ location: m.location, size: 0.05, id: m.id })),
+        markers: markers.map((m) => ({ location: m.location, size: 0.035 })),
         opacity: 0.95,
       } as never) as never;
 
       function animate() {
         if (!isPausedRef.current) phi += speed;
-        globe!.update({
-          phi: phi + phiOffsetRef.current + dragOffset.current.phi,
-          theta: 0.2 + thetaOffsetRef.current + dragOffset.current.theta,
-        });
+        const p = phi + phiOffsetRef.current + dragOffset.current.phi;
+        const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
+        globe!.update({ phi: p, theta: t });
+        positionOverlay(p, t);
         animationId = requestAnimationFrame(animate);
       }
       animate();
@@ -130,81 +155,40 @@ export function GlobePulse({
     <div className={`relative aspect-square w-full ${className}`}>
       <style>{`
         @keyframes cobe-pulse-expand {
-          0% { transform: scale(0.3); opacity: 0.8; }
-          100% { transform: scale(1.5); opacity: 0; }
+          0% { transform: scale(0.3); opacity: 0.75; }
+          100% { transform: scale(1.6); opacity: 0; }
         }
       `}</style>
       <canvas
         ref={canvasRef}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
-        className="h-full w-full cursor-grab opacity-0 transition-opacity duration-700 [contain:layout_paint_size]"
+        className="h-full w-full cursor-grab opacity-0 transition-opacity duration-700"
       />
-      {markers.map((m) => (
-        <div
-          key={m.id}
-          style={{
-            position: "absolute",
-            positionAnchor: `--cobe-${m.id}`,
-            bottom: "anchor(center)",
-            left: "anchor(center)",
-            translate: "-50% 50%",
-            width: 40,
-            height: 40,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none" as const,
-            opacity: `var(--cobe-visible-${m.id}, 0)`,
-            filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-            transition: "opacity 0.4s, filter 0.4s",
-          } as React.CSSProperties}
-        >
-          <span
-            style={{
-              position: "absolute",
-              inset: 0,
-              border: "2px solid var(--accent)",
-              borderRadius: "50%",
-              opacity: 0,
-              animation: `cobe-pulse-expand 2s ease-out infinite ${m.delay}s`,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              inset: 0,
-              border: "2px solid var(--accent)",
-              borderRadius: "50%",
-              opacity: 0,
-              animation: `cobe-pulse-expand 2s ease-out infinite ${m.delay + 0.5}s`,
-            }}
-          />
-          <span
-            style={{
-              width: 8,
-              height: 8,
-              background: "var(--accent)",
-              borderRadius: "50%",
-              boxShadow: "0 0 0 3px var(--background), 0 0 0 5px var(--accent)",
-            }}
-          />
-          {m.label ? (
+      <div ref={overlayRef} aria-hidden className="pointer-events-none absolute inset-0">
+        {markers.map((m) => (
+          <div
+            key={m.id}
+            data-marker={m.id}
+            className="absolute top-0 left-0 flex h-8 w-8 items-center justify-center opacity-0 transition-opacity duration-300"
+          >
             <span
-              style={{
-                position: "absolute",
-                left: "60%",
-                whiteSpace: "nowrap",
-                fontSize: 11,
-                letterSpacing: "0.02em",
-                color: "var(--foreground)",
-              }}
-            >
-              {m.label}
-            </span>
-          ) : null}
-        </div>
-      ))}
+              className="absolute inset-0 rounded-full border-2 border-accent opacity-0"
+              style={{ animation: `cobe-pulse-expand 2.4s ease-out infinite ${m.delay}s` }}
+            />
+            <span
+              className="absolute inset-0 rounded-full border-2 border-accent opacity-0"
+              style={{ animation: `cobe-pulse-expand 2.4s ease-out infinite ${m.delay + 0.6}s` }}
+            />
+            <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_0_3px_var(--background),0_0_0_5px_var(--accent)]" />
+            {m.label ? (
+              <span className="absolute left-[70%] font-display text-[0.7rem] tracking-[0.02em] whitespace-nowrap text-foreground">
+                {m.label}
+              </span>
+            ) : null}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
