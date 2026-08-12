@@ -75,7 +75,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -inset-y-[28%] -z-10"
         style={{
-          transform: `translate3d(0, ${(offset * 0.45).toFixed(2)}px, 0) scale(${(1.12 + offset / 9000).toFixed(3)})`,
+          transform: `translate3d(0, ${(offset * 0.32).toFixed(2)}px, 0) scale(${(1.06 + offset / 12000).toFixed(3)})`,
           opacity: Math.max(0, 1 - offset / 780),
         }}
       >
