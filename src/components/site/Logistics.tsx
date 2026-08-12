@@ -96,7 +96,7 @@ export function Logistics() {
                 Active corridors
               </p>
               <ul className="mt-5 space-y-3 font-display text-base tracking-tight text-foreground">
-                {corridorMarkers.map((m) => (
+                {corridorMarkers.filter((m) => m.id !== "india").map((m) => (
                   <li key={m.id} className="flex items-center gap-3">
                     <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
                     India to {m.label}
