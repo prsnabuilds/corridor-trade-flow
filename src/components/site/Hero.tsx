@@ -73,9 +73,9 @@ export function Hero() {
       {/* full-bleed hero imagery, scrolls slower than the page for depth */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-y-[15%] inset-x-0 -z-10"
+        className="pointer-events-none absolute inset-x-0 -inset-y-[28%] -z-10"
         style={{
-          transform: `translate3d(0, ${(offset * 0.18).toFixed(2)}px, 0) scale(1.06)`,
+          transform: `translate3d(0, ${(offset * 0.45).toFixed(2)}px, 0) scale(${(1.12 + offset / 9000).toFixed(3)})`,
           opacity: Math.max(0, 1 - offset / 780),
         }}
       >
@@ -89,11 +89,16 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-transparent to-background" />
       </div>
 
-      <DealCallout />
+      <div
+        className="absolute inset-0"
+        style={{ transform: `translate3d(0, ${(offset * -0.16).toFixed(2)}px, 0)`, opacity: fade }}
+      >
+        <DealCallout />
+      </div>
 
       <div
         className="mx-auto w-full max-w-6xl px-6 pt-32 pb-24 md:pt-40"
-        style={{ opacity: fade, transform: `translate3d(0, ${(offset * -0.06).toFixed(2)}px, 0)` }}
+        style={{ opacity: fade, transform: `translate3d(0, ${(offset * -0.32).toFixed(2)}px, 0)` }}
       >
         <div className="max-w-2xl">
           <h1 className="hero-line font-display text-5xl leading-[1.02] font-medium tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">

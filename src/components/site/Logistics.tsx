@@ -1,5 +1,5 @@
 import { Ship, Plane, Truck } from "lucide-react";
-import { Eyebrow, Reveal, Section } from "./primitives";
+import { Eyebrow, ParallaxGlow, ParallaxImage, Parallax, Reveal, Section } from "./primitives";
 import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
 import seaImg from "@/assets/freight-sea.jpg";
 import airImg from "@/assets/freight-air.jpg";
@@ -35,17 +35,18 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
       <div
         className="group h-full overflow-hidden rounded-lg border border-border bg-card/70 transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-elevated"
       >
-        <div className="relative h-44 overflow-hidden">
-          <img
-            src={m.img}
-            alt={m.alt}
-            loading="lazy"
-            width={1024}
-            height={1024}
-            className="h-full w-full object-cover opacity-65 transition-transform duration-700 group-hover:scale-105"
-          />
+        <ParallaxImage
+          src={m.img}
+          alt={m.alt}
+          speed={0.22}
+          scale={1.5}
+          width={1024}
+          height={1024}
+          className="h-44"
+          imgClassName="opacity-65 transition-transform duration-700"
+        >
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-        </div>
+        </ParallaxImage>
         <div className="p-7">
           <m.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
           <h3 className="mt-6 font-display text-lg font-medium tracking-tight text-foreground">{m.title}</h3>
