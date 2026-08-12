@@ -7,6 +7,8 @@ export interface PulseMarker {
   /** [latitude, longitude] */
   location: [number, number];
   delay: number;
+  /** label offset in px from the marker dot */
+  labelOffset?: [number, number];
 }
 
 interface GlobePulseProps {
@@ -184,7 +186,12 @@ export function GlobePulse({
             />
             <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_0_3px_var(--background),0_0_0_5px_var(--accent)]" />
             {m.label ? (
-              <span className="absolute left-[70%] font-display text-[0.7rem] tracking-[0.02em] whitespace-nowrap text-foreground">
+              <span
+                className="absolute font-display text-[0.7rem] tracking-[0.02em] whitespace-nowrap text-foreground"
+                style={{
+                  transform: `translate(${m.labelOffset?.[0] ?? 18}px, ${m.labelOffset?.[1] ?? 0}px)`,
+                }}
+              >
                 {m.label}
               </span>
             ) : null}
