@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
-import { TrustBar } from "@/components/site/TrustBar";
 import { Problem } from "@/components/site/Problem";
 import { Approach } from "@/components/site/Approach";
+import { HowAiWorks } from "@/components/site/HowAiWorks";
 import { DealFlow } from "@/components/site/DealFlow";
 import { TrustProtection } from "@/components/site/TrustProtection";
 import { Logistics } from "@/components/site/Logistics";
@@ -37,9 +37,9 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        <TrustBar />
         <Problem />
         <Approach />
+        <HowAiWorks />
         <DealFlow />
         <TrustProtection />
         <Logistics />

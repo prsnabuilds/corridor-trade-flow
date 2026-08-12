@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section } from "./primitives";
+import { Eyebrow, Reveal, Section, useCountUp, useInView } from "./primitives";
 
 const advantages = [
   "AI-verified matching network",
@@ -8,12 +8,60 @@ const advantages = [
   "Document verification at every step",
 ];
 
+function Flywheel() {
+  const { ref, inView } = useInView<HTMLDivElement>(0.4);
+  const deals = useCountUp(5000, inView, 2200);
+
+  return (
+    <div ref={ref} className="mt-8 rounded-lg border border-border bg-card/50 p-7">
+      <div className="flex items-baseline justify-between font-display tracking-tight">
+        <span className="text-sm text-muted-foreground">Deal 500</span>
+        <span className="text-sm text-muted-foreground">Deal 5,000</span>
+      </div>
+      <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-border">
+        <div
+          className="h-full rounded-full bg-accent"
+          style={{
+            width: inView ? "100%" : "0%",
+            transition: "width 2.2s cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
+      </div>
+      <p className="mt-6 font-display text-4xl leading-none font-medium tracking-[-0.04em] text-accent tabular-nums md:text-5xl">
+        {deals.toLocaleString("en-US")}
+      </p>
+      <p className="mt-3 font-sans text-sm text-muted-foreground">
+        Verified, closed-loop data points compounding into a dataset no competitor can rebuild.
+      </p>
+    </div>
+  );
+}
+
+function PullQuote() {
+  const { ref, inView } = useInView<HTMLQuoteElement>(0.3);
+  return (
+    <blockquote
+      ref={ref}
+      className="mt-20 border-l-2 border-accent pl-8"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "none" : "scale(0.965) translateY(16px)",
+        transition: "opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1)",
+      }}
+    >
+      <p className="max-w-3xl font-display text-2xl leading-[1.25] font-medium tracking-[-0.03em] text-accent md:text-3xl lg:text-4xl">
+        The moat is not the technology. It is the data no one else will ever have.
+      </p>
+    </blockquote>
+  );
+}
+
 export function WhyUs() {
   return (
     <Section className="hairline-top">
       <div className="max-w-3xl">
         <Reveal>
-          <Eyebrow>Why Corridor One X Wins</Eyebrow>
+          <Eyebrow>The Compounding Advantage</Eyebrow>
           <h2 className="mt-6 font-display text-3xl leading-[1.1] tracking-[-0.03em] text-foreground md:text-4xl lg:text-[2.75rem]">
             Early numbers. Compounding moat.
           </h2>
@@ -45,16 +93,11 @@ export function WhyUs() {
             500, Corridor One X holds the most valuable proprietary commodity intelligence dataset in the corridor.
             By deal 5,000, no competitor can enter.
           </p>
+          <Flywheel />
         </Reveal>
       </div>
 
-      <Reveal delay={80}>
-        <blockquote className="mt-20 border-l-2 border-accent pl-8">
-          <p className="max-w-3xl font-display text-2xl leading-[1.25] font-medium tracking-[-0.03em] text-accent md:text-3xl lg:text-4xl">
-            The moat is not the technology. It is the data no one else will ever have.
-          </p>
-        </blockquote>
-      </Reveal>
+      <PullQuote />
     </Section>
   );
 }

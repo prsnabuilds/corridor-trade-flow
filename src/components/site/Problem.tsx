@@ -27,30 +27,10 @@ export function Problem() {
         </Reveal>
       </div>
 
-      <Reveal delay={60}>
-        <div className="relative mt-16 overflow-hidden rounded-lg border border-border">
-          <img
-            src={problemImg}
-            alt="Dim trading desk with paperwork and a landline telephone"
-            loading="lazy"
-            width={1536}
-            height={1024}
-            className="h-[18rem] w-full object-cover opacity-70 grayscale-[0.4] md:h-[26rem]"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30"
-          />
-          <p className="absolute bottom-0 left-0 max-w-md p-7 font-display text-lg leading-snug tracking-tight text-foreground md:text-xl">
-            Handshake deals, unverified contacts, and paperwork no one can enforce.
-          </p>
-        </div>
-      </Reveal>
-
-      <div className="mt-4 grid gap-4 md:grid-cols-3">
+      <div className="mt-16 grid gap-4 md:grid-cols-3">
         {cards.map((c, i) => (
-          <Reveal key={c} delay={i * 90}>
-            <div className="h-full rounded-lg border border-border bg-card p-7 transition-colors hover:border-accent/40 hover:bg-elevated">
+          <Reveal key={c} delay={i * 140}>
+            <div className="h-full rounded-lg border border-border bg-card p-7 transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-elevated">
               <span className="font-display text-xs tracking-[0.02em] text-accent">0{i + 1}</span>
               <p className="mt-5 font-display text-lg leading-snug tracking-tight text-foreground">{c}</p>
             </div>

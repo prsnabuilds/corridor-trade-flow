@@ -13,11 +13,11 @@ const faqs = [
   },
   {
     q: "What stops a counterparty from going around me after one deal?",
-    a: "Circumvention protection locks every deal to the platform for 12 months after the LOI, and going around it costs a trader their Trust Score.",
+    a: "Circumvention protection locks every deal to the platform after the LOI, and going around it costs a trader their Trust Score.",
   },
   {
     q: "How does the escrow actually work?",
-    a: "Funds are held in licensed escrow via Razorpay and released only on confirmed delivery, with milestone-based release and a dispute window.",
+    a: "Funds are held in licensed escrow and released only on confirmed delivery, with milestone-based release and a dispute window.",
   },
   {
     q: "What does the Trust Score measure?",
