@@ -69,11 +69,11 @@ export function Hero() {
   const fade = Math.max(0, 1 - offset / 620);
 
   return (
-    <section id="top" className="relative flex min-h-screen items-center overflow-hidden">
+    <section id="top" className="relative flex h-screen min-h-[640px] items-center overflow-hidden">
       {/* full-bleed hero imagery, scrolls slower than the page for depth */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute -inset-y-[15%] inset-x-0 -z-10"
         style={{ transform: `translate3d(0, ${(offset * 0.18).toFixed(2)}px, 0) scale(1.06)` }}
       >
         <img
