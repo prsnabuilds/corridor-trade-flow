@@ -28,9 +28,12 @@ export function Approach() {
 
       <div className="mt-16 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((p, i) => (
-          <Reveal key={p.title} delay={i * 80} className="bg-card">
-            <div className="h-full bg-card p-7 transition-colors hover:bg-elevated">
-              <p.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
+          <Reveal key={p.title} delay={i * 150} className="bg-card">
+            <div className="group h-full bg-card p-7 transition-colors duration-500 hover:bg-elevated">
+              <p.icon
+                className="h-5 w-5 text-accent transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-110"
+                strokeWidth={1.5}
+              />
               <h3 className="mt-6 font-display text-base font-medium tracking-tight text-foreground">{p.title}</h3>
               <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             </div>
