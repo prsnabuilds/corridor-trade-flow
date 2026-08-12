@@ -1,11 +1,43 @@
-import { Cpu, BadgeCheck, Workflow, ShieldCheck } from "lucide-react";
 import { Eyebrow, Reveal, Section } from "./primitives";
+import {
+  MatchingDiagram,
+  VerifyDiagram,
+  AutonomousDiagram,
+  SettlementDiagram,
+  EscrowDiagram,
+} from "./ApproachDiagrams";
 
 const pillars = [
-  { icon: Cpu, title: "AI Matching", body: "Counterparties surfaced by AI on spec fit and Trust Score." },
-  { icon: BadgeCheck, title: "Verified Identity", body: "Every party cleared before they can trade." },
-  { icon: Workflow, title: "Autonomous Settlement", body: "The platform executes the deal flow end to end." },
-  { icon: ShieldCheck, title: "Escrow Protection", body: "Funds held until delivery is confirmed." },
+  {
+    title: "Matching",
+    body: "Counterparties surfaced by AI on spec fit, corridor, volume, and Trust Score.",
+    diagram: MatchingDiagram,
+    span: "lg:col-span-2",
+  },
+  {
+    title: "Verify Identity",
+    body: "KYC and KYB clearance before any party can see or send a deal.",
+    diagram: VerifyDiagram,
+    span: "lg:col-span-2",
+  },
+  {
+    title: "Autonomous",
+    body: "The platform executes the deal flow end to end, without a chain of intermediaries.",
+    diagram: AutonomousDiagram,
+    span: "lg:col-span-2",
+  },
+  {
+    title: "Select Settlement",
+    body: "Terms and rails are chosen per deal, then routed and reconciled automatically.",
+    diagram: SettlementDiagram,
+    span: "lg:col-span-3",
+  },
+  {
+    title: "Escrow Protection",
+    body: "Funds sit in licensed escrow and release only on confirmed delivery.",
+    diagram: EscrowDiagram,
+    span: "lg:col-span-3",
+  },
 ];
 
 export function Approach() {
@@ -26,16 +58,15 @@ export function Approach() {
         </Reveal>
       </div>
 
-      <div className="mt-16 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-6">
         {pillars.map((p, i) => (
-          <Reveal key={p.title} delay={i * 150} className="bg-card">
-            <div className="group h-full bg-card p-7 transition-colors duration-500 hover:bg-elevated">
-              <p.icon
-                className="h-5 w-5 text-accent transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-110"
-                strokeWidth={1.5}
-              />
-              <h3 className="mt-6 font-display text-base font-medium tracking-tight text-foreground">{p.title}</h3>
-              <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+          <Reveal key={p.title} delay={i * 120} className={`bg-card ${p.span}`}>
+            <div className="group flex h-full flex-col bg-card p-7 transition-colors duration-500 hover:bg-elevated">
+              <h3 className="font-display text-base font-medium tracking-tight text-foreground">{p.title}</h3>
+              <p className="mt-2 max-w-sm font-sans text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              <div className="mt-8 flex flex-1 items-end opacity-80 transition-opacity duration-500 group-hover:opacity-100">
+                <p.diagram />
+              </div>
             </div>
           </Reveal>
         ))}
