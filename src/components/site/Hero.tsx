@@ -74,7 +74,10 @@ export function Hero() {
       <div
         aria-hidden
         className="pointer-events-none absolute -inset-y-[15%] inset-x-0 -z-10"
-        style={{ transform: `translate3d(0, ${(offset * 0.18).toFixed(2)}px, 0) scale(1.06)` }}
+        style={{
+          transform: `translate3d(0, ${(offset * 0.18).toFixed(2)}px, 0) scale(1.06)`,
+          opacity: Math.max(0, 1 - offset / 780),
+        }}
       >
         <img
           src={heroBg.url}
