@@ -249,7 +249,10 @@ export function ParallaxImage({
       const r = el.getBoundingClientRect();
       const center = r.top + r.height / 2 - window.innerHeight / 2;
       const mobile = window.matchMedia("(max-width: 767px)").matches;
-      setOffset(-center * speed * (mobile ? 0.5 : 1));
+      const raw = -center * speed * (mobile ? 0.5 : 1);
+      // never travel past the oversized image's hidden margin, so no edge is revealed
+      const limit = Math.max(((scale - 1) / 2) * r.height - 1, 0);
+      setOffset(Math.min(Math.max(raw, -limit), limit));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(compute);
@@ -262,7 +265,7 @@ export function ParallaxImage({
       window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [speed]);
+  }, [speed, scale]);
 
   return (
     <div ref={ref} className={`relative overflow-hidden bg-background ${className}`}>

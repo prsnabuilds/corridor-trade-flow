@@ -1,9 +1,13 @@
 import { Ship, Plane, Truck } from "lucide-react";
 import { Eyebrow, ParallaxGlow, ParallaxImage, Parallax, Reveal, Section } from "./primitives";
 import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
-import seaImg from "@/assets/freight-sea.jpg";
-import airImg from "@/assets/freight-air.jpg";
-import roadImg from "@/assets/freight-road.jpg";
+import seaAsset from "@/assets/freight-sea.png.asset.json";
+import airAsset from "@/assets/freight-air.png.asset.json";
+import roadAsset from "@/assets/freight-road.png.asset.json";
+
+const seaImg = seaAsset.url;
+const airImg = airAsset.url;
+const roadImg = roadAsset.url;
 
 const modes = [
   {
@@ -38,7 +42,7 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
         <ParallaxImage
           src={m.img}
           alt={m.alt}
-          speed={0.22}
+          speed={0.07}
           scale={1.5}
           width={1024}
           height={1024}
