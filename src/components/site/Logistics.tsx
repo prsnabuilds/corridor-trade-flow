@@ -67,7 +67,8 @@ const corridorMarkers: PulseMarker[] = [
 export function Logistics() {
   return (
     <div className="corridor-glow-center glow-animate">
-      <Section id="logistics">
+      <Section id="logistics" className="relative overflow-hidden">
+        <ParallaxGlow speed={0.5} intensity={13} />
         <div className="max-w-3xl">
           <Reveal>
             <Eyebrow>Every Way Goods Move</Eyebrow>
@@ -81,11 +82,11 @@ export function Logistics() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+        <Parallax speed={-0.06} className="mt-16 grid gap-4 md:grid-cols-3">
           {modes.map((m, i) => (
             <ModeCard key={m.title} m={m} delay={i * 130} />
           ))}
-        </div>
+        </Parallax>
 
         <Reveal delay={120}>
           <div className="mt-12 grid items-center gap-10 rounded-lg border border-border bg-card/40 p-7 md:grid-cols-2">

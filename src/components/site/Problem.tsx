@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section } from "./primitives";
+import { Eyebrow, Parallax, ParallaxGlow, Reveal, Section } from "./primitives";
 import problemImg from "@/assets/problem.jpg";
 
 const cards = [
@@ -9,7 +9,8 @@ const cards = [
 
 export function Problem() {
   return (
-    <Section id="problem">
+    <Section id="problem" className="relative overflow-hidden">
+      <ParallaxGlow speed={0.55} intensity={14} />
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <Reveal>
           <Eyebrow>The Status Quo</Eyebrow>
@@ -27,7 +28,7 @@ export function Problem() {
         </Reveal>
       </div>
 
-      <div className="mt-16 grid gap-4 md:grid-cols-3">
+      <Parallax speed={-0.07} className="mt-16 grid gap-4 md:grid-cols-3">
         {cards.map((c, i) => (
           <Reveal key={c} delay={i * 140}>
             <div className="h-full rounded-lg border border-border bg-card p-7 transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-elevated">
@@ -36,7 +37,7 @@ export function Problem() {
             </div>
           </Reveal>
         ))}
-      </div>
+      </Parallax>
     </Section>
   );
 }
