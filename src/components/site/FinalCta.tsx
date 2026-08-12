@@ -4,7 +4,10 @@ import ctaVideo from "@/assets/hero-loop.mp4.asset.json";
 
 export function FinalCta() {
   return (
-    <section id="book-a-demo" className="corridor-glow relative overflow-hidden px-6 py-32 md:py-44">
+    <section
+      id="book-a-demo"
+      className="corridor-glow glow-animate relative overflow-hidden px-6 py-32 md:py-44"
+    >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <video
           className="h-full w-full object-cover opacity-35"
@@ -19,6 +22,14 @@ export function FinalCta() {
         </video>
         <div className="absolute inset-0 bg-background/75" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        {/* strongest corridor light on the page */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(55% 45% at 50% 100%, color-mix(in oklab, var(--accent) 34%, transparent) 0%, transparent 72%)",
+          }}
+        />
       </div>
 
       <div className="mx-auto w-full max-w-3xl text-center">
@@ -37,7 +48,7 @@ export function FinalCta() {
           <div className="mt-10">
             <a
               href="#book-a-demo"
-              className="inline-block rounded-md bg-accent px-7 py-3.5 font-display text-sm font-medium tracking-tight text-accent-foreground transition-colors hover:bg-accent-hover active:bg-accent-pressed"
+              className="inline-block rounded-md bg-accent px-7 py-3.5 font-display text-sm font-medium tracking-tight text-accent-foreground shadow-[0_0_60px_-12px_var(--accent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-hover active:bg-accent-pressed"
             >
               Book a Demo
             </a>
