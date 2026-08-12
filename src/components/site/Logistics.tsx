@@ -46,7 +46,7 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
           scale={1.5}
           width={1024}
           height={1024}
-          className="h-44"
+          className="h-64 md:h-80"
           imgClassName="opacity-65 transition-transform duration-700"
         >
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
