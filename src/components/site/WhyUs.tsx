@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section, useCountUp, useInView } from "./primitives";
+import { Eyebrow, Parallax, ParallaxGlow, Reveal, Section, useCountUp, useInView } from "./primitives";
 
 const advantages = [
   "AI-verified matching network",
@@ -58,7 +58,8 @@ function PullQuote() {
 
 export function WhyUs() {
   return (
-    <Section className="hairline-top">
+    <Section className="hairline-top relative overflow-hidden">
+      <ParallaxGlow speed={0.5} intensity={13} />
       <div className="max-w-3xl">
         <Reveal>
           <Eyebrow>The Compounding Advantage</Eyebrow>
@@ -93,7 +94,9 @@ export function WhyUs() {
             500, Corridor One X holds the most valuable proprietary commodity intelligence dataset in the corridor.
             By deal 5,000, no competitor can enter.
           </p>
-          <Flywheel />
+          <Parallax speed={-0.05}>
+        <Flywheel />
+      </Parallax>
         </Reveal>
       </div>
 

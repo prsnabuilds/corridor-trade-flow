@@ -1,4 +1,4 @@
-import { Reveal } from "./primitives";
+import { Parallax, Reveal } from "./primitives";
 import ctaPoster from "@/assets/hero-port.jpg";
 import ctaVideo from "@/assets/hero-loop.mp4.asset.json";
 
@@ -9,8 +9,9 @@ export function FinalCta() {
       className="corridor-glow glow-animate relative overflow-hidden px-6 py-32 md:py-44"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Parallax speed={0.35} className="absolute -inset-y-[30%] inset-x-0">
         <video
-          className="h-full w-full object-cover opacity-35"
+          className="h-full w-full scale-125 object-cover opacity-35"
           autoPlay
           loop
           muted
@@ -20,6 +21,7 @@ export function FinalCta() {
         >
           <source src={ctaVideo.url} type="video/mp4" />
         </video>
+        </Parallax>
         <div className="absolute inset-0 bg-background/75" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
         {/* strongest corridor light on the page */}

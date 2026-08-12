@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section } from "./primitives";
+import { Eyebrow, ParallaxGlow, Reveal, Section } from "./primitives";
 import {
   MatchingDiagram,
   VerifyDiagram,
@@ -42,7 +42,8 @@ const pillars = [
 
 export function Approach() {
   return (
-    <Section className="hairline-top">
+    <Section className="hairline-top relative overflow-hidden">
+      <ParallaxGlow speed={0.55} intensity={12} />
       <div className="max-w-3xl">
         <Reveal>
           <Eyebrow>The Corridor One X Approach</Eyebrow>

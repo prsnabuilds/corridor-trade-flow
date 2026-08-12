@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Eyebrow, Reveal } from "./primitives";
+import { Eyebrow, Parallax, ParallaxImage, Reveal } from "./primitives";
 import producersImg from "@/assets/who-producers.jpg";
 import exportersImg from "@/assets/who-exporters.jpg";
 import importersImg from "@/assets/who-importers.jpg";
@@ -64,20 +64,20 @@ function TiltCard({ a }: { a: (typeof audiences)[number] }) {
       style={{ transform: style, transition: "transform 600ms cubic-bezier(0.16,1,0.3,1)" }}
       className="h-full overflow-hidden rounded-lg border border-ink/12 bg-light-surface will-change-transform hover:border-ink/30"
     >
-      <div className="relative h-52 overflow-hidden bg-background">
-        <img
-          src={a.img}
-          alt={a.alt}
-          loading="lazy"
-          width={1024}
-          height={1280}
-          className="h-full w-full object-cover"
-        />
+      <ParallaxImage
+        src={a.img}
+        alt={a.alt}
+        speed={0.24}
+        scale={1.5}
+        width={1024}
+        height={1280}
+        className="h-52"
+      >
         <div aria-hidden className="absolute inset-0 bg-background/25" />
-        <p className="absolute bottom-0 left-0 p-5 font-display text-[0.72rem] uppercase tracking-[0.02em] text-accent">
+        <p className="absolute bottom-0 left-0 p-5 font-display text-[0.72rem] tracking-[0.02em] text-accent uppercase">
           {a.label}
         </p>
-      </div>
+      </ParallaxImage>
       <div className="p-8">
         <h3 className="font-display text-xl leading-snug font-medium tracking-tight text-ink">{a.title}</h3>
         <ul className="mt-6 space-y-3">
@@ -97,7 +97,7 @@ function TiltCard({ a }: { a: (typeof audiences)[number] }) {
 
 export function WhoItsFor() {
   return (
-    <section id="who-its-for" className="bg-light-surface-alt px-6 py-24 text-ink md:py-32">
+    <section id="who-its-for" className="relative overflow-hidden bg-light-surface-alt px-6 py-24 text-ink md:py-32">
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-3xl">
           <Reveal>
@@ -108,13 +108,13 @@ export function WhoItsFor() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <Parallax speed={-0.06} className="mt-16 grid gap-6 md:grid-cols-3">
           {audiences.map((a, i) => (
             <Reveal key={a.label} delay={i * 130}>
               <TiltCard a={a} />
             </Reveal>
           ))}
-        </div>
+        </Parallax>
       </div>
     </section>
   );
