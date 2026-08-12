@@ -1,5 +1,6 @@
 import { Ship, Plane, Truck } from "lucide-react";
-import { Eyebrow, Reveal, Section, useInView } from "./primitives";
+import { Eyebrow, Reveal, Section } from "./primitives";
+import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
 import seaImg from "@/assets/freight-sea.jpg";
 import airImg from "@/assets/freight-air.jpg";
 import roadImg from "@/assets/freight-road.jpg";
@@ -11,8 +12,6 @@ const modes = [
     body: "Bulk port-to-port shipping.",
     img: seaImg,
     alt: "Container ship at sea in fog",
-    path: "M4 40 C 60 8, 140 64, 196 24",
-    dur: 6,
   },
   {
     icon: Plane,
@@ -20,8 +19,6 @@ const modes = [
     body: "Air freight for time-sensitive cargo.",
     img: airImg,
     alt: "Cargo aircraft loading at night",
-    path: "M4 48 C 70 -6, 130 -6, 196 40",
-    dur: 4.5,
   },
   {
     icon: Truck,
@@ -29,42 +26,13 @@ const modes = [
     body: "Overland and last-mile transport.",
     img: roadImg,
     alt: "Freight trucks on a highway at night",
-    path: "M4 20 C 56 60, 144 4, 196 44",
-    dur: 7,
   },
 ];
 
-function RouteLine({ d, dur, active }: { d: string; dur: number; active: boolean }) {
-  return (
-    <svg viewBox="0 0 200 64" fill="none" className="mt-6 h-12 w-full" aria-hidden>
-      <path d={d} stroke="currentColor" className="text-border" strokeWidth="1" />
-      <path
-        d={d}
-        stroke="var(--accent)"
-        strokeWidth="1.25"
-        strokeLinecap="round"
-        pathLength={1}
-        strokeDasharray={1}
-        style={{
-          strokeDashoffset: active ? 0 : 1,
-          transition: "stroke-dashoffset 1.6s cubic-bezier(0.16,1,0.3,1) 200ms",
-        }}
-      />
-      {active ? (
-        <circle r="2.5" fill="var(--accent)">
-          <animateMotion dur={`${dur}s`} repeatCount="indefinite" path={d} />
-        </circle>
-      ) : null}
-    </svg>
-  );
-}
-
 function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
-  const { ref, inView } = useInView<HTMLDivElement>(0.3);
   return (
     <Reveal delay={delay}>
       <div
-        ref={ref}
         className="group h-full overflow-hidden rounded-lg border border-border bg-card/70 transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-elevated"
       >
         <div className="relative h-44 overflow-hidden">
@@ -82,12 +50,18 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
           <m.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
           <h3 className="mt-6 font-display text-lg font-medium tracking-tight text-foreground">{m.title}</h3>
           <p className="mt-2 font-sans text-sm text-muted-foreground">{m.body}</p>
-          <RouteLine d={m.path} dur={m.dur} active={inView} />
         </div>
       </div>
     </Reveal>
   );
 }
+
+const corridorMarkers: PulseMarker[] = [
+  { id: "india", label: "India", location: [22.83, 69.72], delay: 0 },
+  { id: "uae", label: "UAE", location: [25.01, 55.06], delay: 0.4 },
+  { id: "oman", label: "Oman", location: [24.47, 56.63], delay: 0.8 },
+  { id: "saudi", label: "Saudi Arabia", location: [26.43, 50.1], delay: 1.2 },
+];
 
 export function Logistics() {
   return (
@@ -113,25 +87,26 @@ export function Logistics() {
         </div>
 
         <Reveal delay={120}>
-          <div className="mt-12 flex flex-col gap-4 rounded-lg border border-border bg-card/40 p-7 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-display text-sm tracking-tight text-foreground">
-              <span className="text-muted-foreground">Active corridors</span>
-              <span className="flex items-center gap-2">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India to UAE
-              </span>
-              <span className="flex items-center gap-2">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India to Oman
-              </span>
-              <span className="flex items-center gap-2">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                India to Saudi Arabia
-              </span>
+          <div className="mt-12 grid items-center gap-10 rounded-lg border border-border bg-card/40 p-7 md:grid-cols-2">
+            <div className="mx-auto w-full max-w-sm">
+              <GlobePulse markers={corridorMarkers} speed={0.0022} />
             </div>
-            <p className="font-sans text-sm text-muted-foreground">
-              New corridors activate on verified trader demand.
-            </p>
+            <div>
+              <p className="font-display text-sm tracking-[0.02em] text-muted-foreground uppercase">
+                Active corridors
+              </p>
+              <ul className="mt-5 space-y-3 font-display text-base tracking-tight text-foreground">
+                {corridorMarkers.map((m) => (
+                  <li key={m.id} className="flex items-center gap-3">
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    India to {m.label}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 font-sans text-sm text-muted-foreground">
+                New corridors activate on verified trader demand.
+              </p>
+            </div>
           </div>
         </Reveal>
       </Section>

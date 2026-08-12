@@ -109,9 +109,6 @@ export function HowAiWorks() {
         </div>
 
         <Reveal delay={80}>
-          <p className="mt-10 font-display text-[0.72rem] uppercase tracking-[0.02em] text-muted-foreground">
-            Select a node to inspect it
-          </p>
           <RadialOrbitalTimeline timelineData={nodes} centerNode={<XMark className="h-7 w-7 text-accent" />} />
         </Reveal>
 
