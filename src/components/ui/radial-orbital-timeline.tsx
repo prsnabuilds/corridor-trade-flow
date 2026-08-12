@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState, type ElementType, type MouseEvent, type ReactNode } from "react";
-import { ArrowRight, Link as LinkIcon, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface TimelineItem {
@@ -95,13 +93,6 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
 
   const isRelatedToActive = (itemId: number) =>
     activeNodeId ? getRelatedItems(activeNodeId).includes(itemId) : false;
-
-  const statusStyles = (status: TimelineItem["status"]) =>
-    status === "completed"
-      ? "border-accent/60 bg-accent/15 text-accent"
-      : status === "in-progress"
-        ? "border-accent bg-accent text-accent-foreground"
-        : "border-border bg-card text-muted-foreground";
 
   return (
     <div
