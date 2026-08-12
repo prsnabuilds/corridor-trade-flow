@@ -82,8 +82,8 @@ export function Hero() {
           className="h-full w-full object-cover object-right"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-transparent to-background" />
       </div>
 
       <DealCallout />
