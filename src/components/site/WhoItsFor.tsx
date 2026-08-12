@@ -71,7 +71,7 @@ function TiltCard({ a }: { a: (typeof audiences)[number] }) {
         scale={1.5}
         width={1024}
         height={1280}
-        className="h-52"
+        className="h-64 md:h-96"
       >
         <div aria-hidden className="absolute inset-0 bg-background/25" />
         <p className="absolute bottom-0 left-0 p-5 font-display text-[0.72rem] tracking-[0.02em] text-accent uppercase">
