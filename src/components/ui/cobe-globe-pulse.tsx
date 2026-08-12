@@ -120,6 +120,7 @@ export function GlobePulse({
         markers: markers.map((m) => ({ location: m.location, size: 0.035 })),
         opacity: 0.95,
         onRender: (state: Record<string, number>) => {
+          (window as unknown as Record<string, number>).__globeFrames = ((window as unknown as Record<string, number>).__globeFrames ?? 0) + 1;
           if (!isPausedRef.current) phi += speed;
           const p = phi + phiOffsetRef.current + dragOffset.current.phi;
           const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
