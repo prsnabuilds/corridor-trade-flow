@@ -1,6 +1,6 @@
 import { Parallax, Reveal } from "./primitives";
 import ctaPoster from "@/assets/hero-port.jpg";
-import ctaVideo from "@/assets/hero-loop.mp4.asset.json";
+import ctaVideo from "@/assets/hero-loop.mp4";
 
 export function FinalCta() {
   return (
@@ -19,7 +19,7 @@ export function FinalCta() {
           preload="none"
           poster={ctaPoster}
         >
-          <source src={ctaVideo.url} type="video/mp4" />
+          <source src={ctaVideo} type="video/mp4" />
         </video>
         </Parallax>
         <div className="absolute inset-0 bg-background/75" />

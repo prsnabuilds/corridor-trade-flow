@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 const links = [
   { label: "How It Works", href: "#how-it-works" },
@@ -29,7 +29,7 @@ export function Nav() {
     >
       <nav className="mx-auto flex h-18 w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
         <a href="#top" className="flex items-center" aria-label="Corridor One X home">
-          <img src={logo.url} alt="Corridor One X" className="h-6 w-auto md:h-7" />
+          <img src={logo} alt="Corridor One X" className="h-6 w-auto md:h-7" />
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">
