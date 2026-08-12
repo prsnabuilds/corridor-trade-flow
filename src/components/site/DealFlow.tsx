@@ -42,7 +42,8 @@ export function DealFlow() {
   const { ref, progress } = useScrollProgress<HTMLOListElement>();
 
   return (
-    <Section id="how-it-works" className="hairline-top">
+    <Section id="how-it-works" className="hairline-top relative overflow-hidden">
+      <ParallaxGlow speed={0.55} intensity={12} />
       <div className="max-w-3xl">
         <Reveal>
           <Eyebrow>The Deal Flow</Eyebrow>
