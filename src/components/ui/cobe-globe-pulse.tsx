@@ -71,7 +71,6 @@ export function GlobePulse({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    console.log("[globe] effect", !!canvas);
     if (!canvas) return;
     let globe: { update: (s: Record<string, number>) => void; destroy: () => void } | null = null;
     let animationId = 0;
@@ -88,9 +87,10 @@ export function GlobePulse({
         const latRad = (m.location[0] * Math.PI) / 180;
         const lonRad = (m.location[1] * Math.PI) / 180;
         // globe space
-        const x0 = Math.cos(latRad) * Math.sin(lonRad + currentPhi - Math.PI / 2);
+        const a = lonRad + currentPhi + 1.396;
+        const x0 = Math.cos(latRad) * Math.sin(a);
         const y0 = Math.sin(latRad);
-        const z0 = Math.cos(latRad) * Math.cos(lonRad + currentPhi - Math.PI / 2);
+        const z0 = Math.cos(latRad) * Math.cos(a);
         // tilt around x-axis by theta
         const y1 = y0 * Math.cos(currentTheta) + z0 * Math.sin(currentTheta);
         const z1 = -y0 * Math.sin(currentTheta) + z0 * Math.cos(currentTheta);
@@ -127,17 +127,10 @@ export function GlobePulse({
         if (!isPausedRef.current) phi += speed;
         const p = phi + phiOffsetRef.current + dragOffset.current.phi;
         const t = 0.2 + thetaOffsetRef.current + dragOffset.current.theta;
-        (window as unknown as Record<string, number>).__globeFrames =
-          ((window as unknown as Record<string, number>).__globeFrames ?? 0) + 1;
-        try {
-          globe!.update({ phi: p, theta: t });
-        } catch (err) {
-          console.error("globe update failed", err);
-        }
+        globe!.update({ phi: p, theta: t });
         positionOverlay(p, t);
         animationId = requestAnimationFrame(animate);
       }
-      console.log("[globe] created");
       animate();
       setTimeout(() => canvas && (canvas.style.opacity = "1"));
     }
