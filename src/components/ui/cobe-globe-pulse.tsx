@@ -92,10 +92,10 @@ export function GlobePulse({
         const y0 = Math.sin(latRad);
         const z0 = Math.cos(latRad) * Math.cos(a);
         // tilt around x-axis by theta
-        const y1 = y0 * Math.cos(currentTheta) + z0 * Math.sin(currentTheta);
-        const z1 = -y0 * Math.sin(currentTheta) + z0 * Math.cos(currentTheta);
+        const y1 = y0 * Math.cos(currentTheta) - z0 * Math.sin(currentTheta);
+        const z1 = y0 * Math.sin(currentTheta) + z0 * Math.cos(currentTheta);
         const visible = z1 > 0.06;
-        el.style.transform = `translate(-50%, -50%) translate(${r + x0 * r * 0.96}px, ${r - y1 * r * 0.96}px)`;
+        el.style.transform = `translate(-50%, -50%) translate(${r + x0 * r}px, ${r - y1 * r}px)`;
         el.style.opacity = visible ? "1" : "0";
       }
     }
