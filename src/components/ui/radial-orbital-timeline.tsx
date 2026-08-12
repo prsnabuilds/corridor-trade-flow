@@ -173,18 +173,6 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
                   <Card className="absolute left-1/2 top-12 w-72 -translate-x-1/2 gap-0 border-accent/30 bg-elevated/95 py-0 text-left shadow-xl backdrop-blur-md">
                     <div className="absolute -top-3 left-1/2 h-3 w-px -translate-x-1/2 bg-accent/50" />
                     <CardHeader className="gap-2 px-5 pt-5">
-                      <div className="flex items-center justify-between gap-3">
-                        <Badge className={`rounded-full px-2.5 text-[0.62rem] ${statusStyles(item.status)}`}>
-                          {item.status === "completed"
-                            ? "ACTIVE"
-                            : item.status === "in-progress"
-                              ? "LIVE"
-                              : "CONTINUOUS"}
-                        </Badge>
-                        <span className="font-display text-[0.68rem] uppercase tracking-[0.02em] text-muted-foreground">
-                          {item.date}
-                        </span>
-                      </div>
                       <CardTitle className="font-display text-base leading-snug font-medium tracking-tight text-foreground">
                         {item.category}
                       </CardTitle>
@@ -193,52 +181,9 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
                       <p className="font-sans text-[0.82rem] leading-relaxed text-secondary-foreground">
                         {item.content}
                       </p>
-
-                      <div className="mt-4">
-                        <div className="flex items-center justify-between font-display text-[0.66rem] uppercase tracking-[0.02em] text-muted-foreground">
-                          <span className="flex items-center gap-1.5">
-                            <Zap className="h-3 w-3 text-accent" strokeWidth={1.5} />
-                            Signal strength
-                          </span>
-                          <span className="text-accent">{item.energy}%</span>
-                        </div>
-                        <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-border">
-                          <div
-                            className="h-full rounded-full bg-accent transition-all duration-1000"
-                            style={{ width: `${item.energy}%` }}
-                          />
-                        </div>
-                      </div>
-
-                      {item.relatedIds.length > 0 && (
-                        <div className="mt-4 border-t border-dashed border-border pt-3">
-                          <div className="flex items-center gap-1.5 font-display text-[0.66rem] uppercase tracking-[0.02em] text-muted-foreground">
-                            <LinkIcon className="h-3 w-3" strokeWidth={1.5} />
-                            Connected nodes
-                          </div>
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {item.relatedIds.map((relatedId) => {
-                              const relatedItem = timelineData.find((i) => i.id === relatedId);
-                              return (
-                                <button
-                                  key={relatedId}
-                                  type="button"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleItem(relatedId);
-                                  }}
-                                  className="flex items-center gap-1 rounded-full border border-border px-2 py-0.5 font-sans text-[0.7rem] text-secondary-foreground transition-colors hover:border-accent/60 hover:text-accent"
-                                >
-                                  {relatedItem?.title}
-                                  <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
                     </CardContent>
                   </Card>
+
                 )}
               </div>
             );
