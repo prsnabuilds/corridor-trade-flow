@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section } from "./primitives";
+import { Eyebrow, ParallaxGlow, Reveal, Section } from "./primitives";
 import {
   MatchingDiagram,
   VerifyDiagram,

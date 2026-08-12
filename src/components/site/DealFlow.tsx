@@ -1,4 +1,4 @@
-import { Eyebrow, Reveal, Section, useScrollProgress } from "./primitives";
+import { Eyebrow, ParallaxGlow, Reveal, Section, useScrollProgress } from "./primitives";
 
 const steps = [
   {
