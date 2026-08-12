@@ -41,6 +41,10 @@ function Index() {
         </div>
       </div>
       <main className="relative z-10 bg-background">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -top-32 h-32 bg-gradient-to-b from-transparent to-background"
+        />
         <Problem />
         <Approach />
         <HowAiWorks />
