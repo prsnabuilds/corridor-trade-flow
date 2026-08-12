@@ -35,8 +35,10 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Nav />
-      <main>
+      <div className="sticky top-0 z-0">
         <Hero />
+      </div>
+      <main className="relative z-10 bg-background">
         <Problem />
         <Approach />
         <HowAiWorks />
@@ -52,3 +54,4 @@ function Index() {
     </div>
   );
 }
+
