@@ -44,12 +44,6 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
   );
 }
 
-const corridorMarkers: PulseMarker[] = [
-  { id: "india", label: "India", location: [22.83, 69.72], delay: 0, labelOffset: [24, 14] },
-  { id: "uae", label: "UAE", location: [25.01, 55.06], delay: 0.4, labelOffset: [4, -22] },
-  { id: "oman", label: "Oman", location: [24.47, 56.63], delay: 0.8, labelOffset: [22, 20] },
-  { id: "saudi", label: "Saudi Arabia", location: [26.43, 50.1], delay: 1.2, labelOffset: [-78, -12] },
-];
 
 export function Logistics() {
   return (
