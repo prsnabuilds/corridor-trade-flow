@@ -1,7 +1,7 @@
-import { Suspense, useRef, type RefObject } from "react";
+import { Suspense, useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center, AdaptiveDpr } from "@react-three/drei";
-import type { Group } from "three";
+import { Box3, Vector3, type Group } from "three";
 import modelUrl from "@/assets/cargo-container.glb?url";
 
 useGLTF.preload(modelUrl);
@@ -10,6 +10,14 @@ function Container({ progress }: { progress: RefObject<number> }) {
   const group = useRef<Group>(null);
   const current = useRef(0);
   const { scene } = useGLTF(modelUrl);
+
+  // normalise wildly varying export scales to a consistent on-screen size
+  const fit = useMemo(() => {
+    const size = new Box3().setFromObject(scene).getSize(new Vector3());
+    const max = Math.max(size.x, size.y, size.z) || 1;
+    return 3.2 / max;
+  }, [scene]);
+
 
   useFrame((state, delta) => {
     const target = (progress.current ?? 0) * Math.PI * 2;
