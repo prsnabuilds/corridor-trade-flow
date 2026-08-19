@@ -11,8 +11,17 @@ function Container({ progress }: { progress: RefObject<number> }) {
   const current = useRef(0);
   const { scene } = useGLTF(modelUrl);
 
-  // normalise wildly varying export scales to a consistent on-screen size
+  // normalise wildly varying export scales to a consistent on-screen size,
+  // and keep the baked texture readable under simple studio lights
   const fit = useMemo(() => {
+    scene.traverse((o) => {
+      const mat = (o as Mesh).material as MeshStandardMaterial | undefined;
+      if (!mat || !("metalness" in mat)) return;
+      mat.metalness = 0.1;
+      mat.roughness = 0.62;
+      mat.envMapIntensity = 0.6;
+      mat.needsUpdate = true;
+    });
     const size = new Box3().setFromObject(scene).getSize(new Vector3());
     const max = Math.max(size.x, size.y, size.z) || 1;
     return 3.2 / max;
