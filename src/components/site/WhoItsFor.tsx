@@ -1,15 +1,12 @@
 import { useRef, useState } from "react";
-import { Eyebrow, Parallax, ParallaxImage, Reveal } from "./primitives";
-import producersImg from "@/assets/who-producers.jpg";
-import exportersImg from "@/assets/who-exporters.jpg";
-import importersImg from "@/assets/who-importers.jpg";
+import { Eyebrow, Parallax, Reveal } from "./primitives";
+import { ProducersDiagram, ExportersDiagram, ImportersDiagram } from "./AudienceDiagrams";
 
 const audiences = [
   {
     label: "Producers",
     title: "You produced it. Sell it directly.",
-    img: producersImg,
-    alt: "Producer inspecting bulk grain in a storage silo",
+    diagram: ProducersDiagram,
     points: [
       "If you harvest, extract, or manufacture the commodity yourself, you don't need to be an exporter.",
       "Reach verified buyers directly, with no trader in between.",
@@ -19,8 +16,7 @@ const audiences = [
   {
     label: "Exporters",
     title: "Stop chasing unverified buyers.",
-    img: exportersImg,
-    alt: "Exporter with a clipboard at a container yard at dawn",
+    diagram: ExportersDiagram,
     points: [
       "Verified buyers with real intent on record.",
       "Get paid through escrow before you take on risk.",
@@ -30,8 +26,7 @@ const audiences = [
   {
     label: "Importers",
     title: "Stop wiring money into hope.",
-    img: importersImg,
-    alt: "Importer checking incoming pallets in a warehouse",
+    diagram: ImportersDiagram,
     points: [
       "Verified suppliers with a proven track record.",
       "Quality and documents checked before release.",
@@ -64,20 +59,12 @@ function TiltCard({ a }: { a: (typeof audiences)[number] }) {
       style={{ transform: style, transition: "transform 600ms cubic-bezier(0.16,1,0.3,1)" }}
       className="h-full overflow-hidden rounded-lg border border-ink/12 bg-light-surface will-change-transform hover:border-ink/30"
     >
-      <ParallaxImage
-        src={a.img}
-        alt={a.alt}
-        speed={0.08}
-        scale={1.5}
-        width={1024}
-        height={1280}
-        className="h-64 md:h-96"
-      >
-        <div aria-hidden className="absolute inset-0 bg-background/25" />
+      <div className="relative h-64 bg-background p-6 md:h-96">
+        <a.diagram />
         <p className="absolute bottom-0 left-0 p-5 font-display text-[0.72rem] tracking-[0.02em] text-accent uppercase">
           {a.label}
         </p>
-      </ParallaxImage>
+      </div>
       <div className="p-8">
         <h3 className="font-display text-xl leading-snug font-medium tracking-tight text-ink">{a.title}</h3>
         <ul className="mt-6 space-y-3">
