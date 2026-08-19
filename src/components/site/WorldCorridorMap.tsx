@@ -9,7 +9,7 @@ const hubs = data.hubs as unknown as Record<string, [number, number]>;
 const width = 120;
 const height = 60;
 
-const tone = ["var(--border)", "color-mix(in oklab, var(--accent) 62%, var(--border))", "var(--accent)"];
+const tone = ["var(--border)", "color-mix(in oklab, var(--accent) 80%, var(--border))", "var(--accent)"];
 
 export function WorldCorridorMap() {
   const { ref, inView } = useInView<HTMLDivElement>(0.15);
@@ -29,7 +29,7 @@ export function WorldCorridorMap() {
             cy={p.y}
             r={p.t === 2 ? 0.42 : 0.34}
             fill={tone[p.t]}
-            opacity={inView ? (p.t === 2 ? 1 : p.t === 1 ? 0.75 : 0.5) : 0}
+            opacity={inView ? (p.t === 2 ? 1 : p.t === 1 ? 0.55 : 0.5) : 0}
             style={{
               transition: "opacity 900ms cubic-bezier(0.16,1,0.3,1)",
               transitionDelay: `${Math.min(p.x * 5 + (p.t === 2 ? 250 : 0), 1200)}ms`,
