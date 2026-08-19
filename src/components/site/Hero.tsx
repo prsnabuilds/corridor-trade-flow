@@ -80,14 +80,12 @@ function StageBlock({ label, copy }: { label: string; copy: string }) {
   );
 }
 
-function Callout({
+function StageCallout({
   label,
-  copy,
   side,
   opacity,
 }: {
   label: string;
-  copy: string;
   side: "left" | "right";
   opacity: number;
 }) {
@@ -122,14 +120,46 @@ function Callout({
                 "repeating-linear-gradient(to right, var(--accent) 0 4px, transparent 4px 9px)",
             }}
           />
-          {/* label box */}
-          <div className="deal-callout-box max-w-[15rem] rounded-lg border border-accent/25 bg-card/85 px-4 py-3 backdrop-blur-sm md:max-w-xs">
+          {/* compact label pill */}
+          <div className="deal-callout-box rounded-md border border-accent/25 bg-card/85 px-3 py-1.5 backdrop-blur-sm">
             <p className="font-display text-[0.68rem] tracking-[0.02em] text-accent uppercase">{label}</p>
-            <p className="deal-callout-label mt-2 font-sans text-sm leading-relaxed text-secondary-foreground">
-              {copy}
-            </p>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function StageDescription({
+  label,
+  copy,
+  side,
+  opacity,
+}: {
+  label: string;
+  copy: string;
+  side: "left" | "right";
+  opacity: number;
+}) {
+  const active = opacity > 0.02;
+  const shift = (1 - opacity) * (side === "right" ? 48 : -48);
+  return (
+    <div
+      aria-hidden={opacity < 0.5}
+      className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out"
+      style={{ opacity, visibility: active ? "visible" : "hidden" }}
+    >
+      <div
+        className="absolute top-1/2 w-full max-w-xs -translate-y-1/2 px-6 md:max-w-sm"
+        style={{
+          [side === "right" ? "right" : "left"]: "0%",
+          transform: `translate3d(${shift}px, -50%, 0)`,
+          transition: "transform 600ms cubic-bezier(0.16, 1, 0.3, 1)",
+          textAlign: side === "right" ? "right" : "left",
+        }}
+      >
+        <p className="font-display text-[0.68rem] tracking-[0.02em] text-accent uppercase">{label}</p>
+        <p className="mt-3 font-sans text-base leading-relaxed text-secondary-foreground md:text-lg">{copy}</p>
       </div>
     </div>
   );
@@ -250,14 +280,30 @@ export function Hero() {
         {/* stage callouts attached to the container */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] mx-auto max-w-7xl px-6">
           {stages.map((s, i) => (
-            <Callout
-              key={s.label}
+            <StageCallout
+              key={`callout-${s.label}`}
               label={s.label}
-              copy={s.copy}
               side={i % 2 === 0 ? "right" : "left"}
               opacity={stageOp(i)}
             />
           ))}
+        </div>
+
+        {/* stage descriptions on the opposite side */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] mx-auto max-w-7xl px-6">
+          {stages.map((s, i) => {
+            const calloutSide = i % 2 === 0 ? "right" : "left";
+            const descSide = calloutSide === "right" ? "left" : "right";
+            return (
+              <StageDescription
+                key={`desc-${s.label}`}
+                label={s.label}
+                copy={s.copy}
+                side={descSide}
+                opacity={stageOp(i)}
+              />
+            );
+          })}
         </div>
 
         <div
