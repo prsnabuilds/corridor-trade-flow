@@ -4,7 +4,7 @@ import { useInView } from "./primitives";
 type Dot = { x: number; y: number; t: number };
 
 const points = data.points as Dot[];
-const hubs = data.hubs as Record<string, [number, number]>;
+const hubs = data.hubs as unknown as Record<string, [number, number]>;
 
 const width = 120;
 const height = 60;
