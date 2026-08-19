@@ -34,11 +34,11 @@ export function ProducersDiagram() {
         </div>
       </foreignObject>
       {/* sacks */}
-      {[
+      {([
         [124, 108],
         [152, 108],
         [138, 86],
-      ].map(([x, y], i) => (
+      ] as Array<[number, number]>).map(([x, y], i) => (
         <g key={i} style={{ animation: `dgm-float ${5 + i}s ease-in-out ${i * 0.4}s infinite`, transformOrigin: `${x}px ${y}px` }}>
           <path d={`M${x - 12} ${y + 10} L${x - 9} ${y - 8} Q${x} ${y - 14} ${x + 9} ${y - 8} L${x + 12} ${y + 10} Z`} className={line} strokeWidth="0.75" />
           <line x1={x - 6} y1={y - 6} x2={x + 6} y2={y - 6} className="stroke-accent/70" strokeWidth="0.75" />
