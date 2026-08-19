@@ -1,7 +1,7 @@
 import { Suspense, useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center, AdaptiveDpr } from "@react-three/drei";
-import { Box3, Vector3, type Group } from "three";
+import { Box3, Vector3, type Group, type Mesh, type MeshStandardMaterial } from "three";
 import modelUrl from "@/assets/cargo-container.glb?url";
 
 useGLTF.preload(modelUrl);
