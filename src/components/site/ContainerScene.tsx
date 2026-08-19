@@ -24,7 +24,7 @@ function Container({ progress }: { progress: RefObject<number> }) {
     });
     const size = new Box3().setFromObject(scene).getSize(new Vector3());
     const max = Math.max(size.x, size.y, size.z) || 1;
-    return 3.2 / max;
+    return 2.35 / max;
   }, [scene]);
 
 
@@ -51,7 +51,7 @@ function Container({ progress }: { progress: RefObject<number> }) {
 export default function ContainerScene({ progress }: { progress: RefObject<number> }) {
   return (
     <Canvas
-      camera={{ position: [0, 1.1, 6.4], fov: 38 }}
+      camera={{ position: [0, 1.05, 6.8], fov: 36 }}
       dpr={[1, 1.8]}
       gl={{ antialias: true, alpha: true }}
       style={{ width: "100%", height: "100%" }}
