@@ -4,35 +4,45 @@ const steps = [
   {
     n: "01",
     title: "Listing",
-    body: "Producer or exporter submits commodity, grade, quantity, corridor, and minimum price. Identity verified against GST, IEC, and trade documents.",
+    body: "Producer or exporter submits commodity, grade, quantity, corridor, and minimum price. Identity verified against GST, IEC, and trade documents. Need a commodity that isn't listed? Corridor One X sources it directly from verified, reliable origins and brings it to you.",
   },
   {
     n: "02",
     title: "AI Match",
-    body: "Importer submits requirements. Corridor One X's AI matches against verified counterparties, ranked by spec fit and Trust Score. Identities stay masked.",
+    body: "Corridor One X's AI matches requirements against verified counterparties, ranked by spec fit and Trust Score. Identities stay masked.",
   },
   {
     n: "03",
     title: "Negotiation",
-    body: "Both parties negotiate through the platform's masked relay. Neither identity is revealed.",
+    body: "Both parties negotiate through the platform's AI-assisted masked relay. Neither identity is revealed while terms are agreed.",
   },
   {
     n: "04",
     title: "LOI Signed",
-    body: "A digital Letter of Intent is signed. Circumvention protection locks the deal to the platform.",
+    body: "A digital Letter of Intent is signed, with two ways to structure it: directly between buyer and seller, or through Corridor One X, where the platform stands between both parties and takes responsibility for the agreement. Circumvention protection locks the deal to the platform.",
   },
   {
     n: "05",
+    title: "Samples",
+    body: "Need to inspect before committing? Samples are routed through Corridor One X, so quality is confirmed without either party's identity being exposed.",
+  },
+  {
+    n: "06",
+    title: "Logistics",
+    body: "Two ways to move the goods: the buyer arranges their own logistics, and seller details are shared to coordinate; or Corridor One X handles logistics end to end, and the seller stays fully masked.",
+  },
+  {
+    n: "07",
     title: "Escrow Funded",
     body: "Buyer deposits into licensed escrow. Counterparty identity revealed.",
   },
   {
-    n: "06",
+    n: "08",
     title: "Shipped & Verified",
-    body: "Shipping documents verified. Logistics tracked across the route the goods move: sea, air, or road.",
+    body: "Shipping documents verified. Goods tracked across the route they move: sea, air, or road.",
   },
   {
-    n: "07",
+    n: "09",
     title: "Escrow Released",
     body: "Funds released on delivery confirmation. Trust Scores updated. Deal complete.",
   },

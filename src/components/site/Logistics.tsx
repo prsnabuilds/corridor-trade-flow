@@ -1,9 +1,7 @@
 import { Ship, Plane, Truck } from "lucide-react";
-import { Eyebrow, ParallaxGlow, ParallaxImage, Parallax, Reveal, Section } from "./primitives";
+import { Eyebrow, ParallaxGlow, Parallax, Reveal, Section } from "./primitives";
 import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
-import seaImg from "@/assets/freight-sea.png";
-import airImg from "@/assets/freight-air.png";
-import roadImg from "@/assets/freight-road.png";
+import { SeaDiagram, AirDiagram, RoadDiagram } from "./TransportDiagrams";
 
 
 const modes = [
@@ -11,22 +9,19 @@ const modes = [
     icon: Ship,
     title: "Seaways",
     body: "Bulk port-to-port shipping.",
-    img: seaImg,
-    alt: "Container ship at sea in fog",
+    diagram: SeaDiagram,
   },
   {
     icon: Plane,
     title: "Airways",
     body: "Air freight for time-sensitive cargo.",
-    img: airImg,
-    alt: "Cargo aircraft loading at night",
+    diagram: AirDiagram,
   },
   {
     icon: Truck,
     title: "Roadways",
     body: "Overland and last-mile transport.",
-    img: roadImg,
-    alt: "Freight trucks on a highway at night",
+    diagram: RoadDiagram,
   },
 ];
 
@@ -36,18 +31,9 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
       <div
         className="group h-full overflow-hidden rounded-lg border border-border bg-card/70 transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-elevated"
       >
-        <ParallaxImage
-          src={m.img}
-          alt={m.alt}
-          speed={0.07}
-          scale={1.5}
-          width={1024}
-          height={1024}
-          className="h-64 md:h-80"
-          imgClassName="opacity-65 transition-transform duration-700"
-        >
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-        </ParallaxImage>
+        <div className="relative h-64 border-b border-border bg-background/60 p-6 opacity-85 transition-opacity duration-500 group-hover:opacity-100 md:h-80">
+          <m.diagram />
+        </div>
         <div className="p-7">
           <m.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
           <h3 className="mt-6 font-display text-lg font-medium tracking-tight text-foreground">{m.title}</h3>
