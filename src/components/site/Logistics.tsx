@@ -1,6 +1,6 @@
 import { Ship, Plane, Truck } from "lucide-react";
 import { Eyebrow, ParallaxGlow, Parallax, Reveal, Section } from "./primitives";
-import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
+import { WorldCorridorMap } from "./WorldCorridorMap";
 import { SeaDiagram, AirDiagram, RoadDiagram } from "./TransportDiagrams";
 
 
@@ -44,12 +44,6 @@ function ModeCard({ m, delay }: { m: (typeof modes)[number]; delay: number }) {
   );
 }
 
-const corridorMarkers: PulseMarker[] = [
-  { id: "india", label: "India", location: [22.83, 69.72], delay: 0, labelOffset: [24, 14] },
-  { id: "uae", label: "UAE", location: [25.01, 55.06], delay: 0.4, labelOffset: [4, -22] },
-  { id: "oman", label: "Oman", location: [24.47, 56.63], delay: 0.8, labelOffset: [22, 20] },
-  { id: "saudi", label: "Saudi Arabia", location: [26.43, 50.1], delay: 1.2, labelOffset: [-78, -12] },
-];
 
 export function Logistics() {
   return (
@@ -76,26 +70,40 @@ export function Logistics() {
         </Parallax>
 
         <Reveal delay={120}>
-          <div className="mt-12 grid items-center gap-10 rounded-lg border border-border bg-card/40 p-7 md:grid-cols-2">
-            <div className="mx-auto w-full max-w-sm">
-              <GlobePulse markers={corridorMarkers} speed={0.0012} initialPhi={3.84} />
+          <div className="mt-16 overflow-hidden rounded-lg border border-border bg-card/40 p-6 md:p-10">
+            <h3 className="font-display text-2xl tracking-[-0.03em] text-foreground md:text-3xl">Global Corridors</h3>
+
+            <div className="mt-8">
+              <WorldCorridorMap />
             </div>
-            <div>
-              <p className="font-display text-sm tracking-[0.02em] text-muted-foreground uppercase">
-                Active corridors
-              </p>
-              <ul className="mt-5 space-y-3 font-display text-base tracking-tight text-foreground">
-                {corridorMarkers.filter((m) => m.id !== "india").map((m) => (
-                  <li key={m.id} className="flex items-center gap-3">
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    India to {m.label}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 font-sans text-sm text-muted-foreground">
-                New corridors activate on verified trader demand.
-              </p>
+
+            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-14">
+              <div>
+                <p className="font-display text-[0.72rem] uppercase tracking-[0.02em] text-muted-foreground">
+                  Active now
+                </p>
+                <p className="mt-3 flex items-center gap-3 font-display text-base tracking-tight text-foreground">
+                  <span aria-hidden className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  India · Middle East · Africa
+                </p>
+              </div>
+              <div>
+                <p className="font-display text-[0.72rem] uppercase tracking-[0.02em] text-muted-foreground">
+                  Coming soon
+                </p>
+                <p className="mt-3 flex items-center gap-3 font-display text-base tracking-tight text-secondary-foreground">
+                  <span
+                    aria-hidden
+                    className="h-2 w-2 shrink-0 rounded-full border border-accent/50 bg-transparent"
+                  />
+                  Europe · Australia
+                </p>
+              </div>
             </div>
+
+            <p className="mt-8 font-sans text-sm text-muted-foreground">
+              New corridors activate on verified trader demand.
+            </p>
           </div>
         </Reveal>
       </Section>
