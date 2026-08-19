@@ -1,6 +1,6 @@
 import { Ship, Plane, Truck } from "lucide-react";
 import { Eyebrow, ParallaxGlow, Parallax, Reveal, Section } from "./primitives";
-import { GlobePulse, type PulseMarker } from "@/components/ui/cobe-globe-pulse";
+import { WorldCorridorMap } from "./WorldCorridorMap";
 import { SeaDiagram, AirDiagram, RoadDiagram } from "./TransportDiagrams";
 
 
