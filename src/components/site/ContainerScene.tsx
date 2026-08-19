@@ -33,7 +33,7 @@ function Container({ progress }: { progress: RefObject<number> }) {
   return (
     <group ref={group}>
       <Center>
-        <primitive object={scene} />
+        <primitive object={scene} scale={fit} />
       </Center>
     </group>
   );
