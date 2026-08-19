@@ -386,3 +386,40 @@
   0%, 100% { transform: translateY(0) rotate(-0.6deg); }
   50% { transform: translateY(-3px) rotate(0.6deg); }
 }
+
+/* ---------- hero ambient backdrop ---------- */
+
+@keyframes hero-aura-drift-a {
+  0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(8%, 6%, 0) scale(1.15); opacity: 0.85; }
+}
+@keyframes hero-aura-drift-b {
+  0%, 100% { transform: translate3d(6%, 8%, 0) scale(1.1); opacity: 0.5; }
+  50% { transform: translate3d(-8%, -6%, 0) scale(1); opacity: 0.8; }
+}
+@keyframes hero-aura-drift-c {
+  0%, 100% { transform: translate3d(0, 10%, 0) scale(1.05); opacity: 0.35; }
+  50% { transform: translate3d(4%, -12%, 0) scale(1.2); opacity: 0.6; }
+}
+
+.hero-aura {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform, opacity;
+}
+.hero-aura-a {
+  inset: -25% 30% 35% -20%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 70%);
+  animation: hero-aura-drift-a 34s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hero-aura-b {
+  inset: 30% -15% -25% 35%;
+  background: radial-gradient(circle, color-mix(in oklab, oklch(0.5 0.09 175) 26%, transparent) 0%, transparent 70%);
+  animation: hero-aura-drift-b 46s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hero-aura-c {
+  inset: 10% 10% 10% 20%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 7%, transparent) 0%, transparent 68%);
+  animation: hero-aura-drift-c 58s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}

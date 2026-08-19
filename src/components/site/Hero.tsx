@@ -1,29 +1,40 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { XMark } from "./XMark";
 
 const ContainerScene = lazy(() => import("./ContainerScene"));
 
 const stages = [
   {
     label: "Listed",
-    copy: "Every commodity is listed with verified grade, quantity, and origin, checked before the deal begins.",
+    copy: "Every commodity listed with verified grade, quantity, and origin, checked before the deal begins.",
   },
   {
     label: "Matched",
-    copy: "AI surfaces a verified counterparty on spec fit, corridor, and Trust Score. Identities stay masked.",
+    copy: "AI surfaces a verified counterparty on spec, corridor, and Trust Score. Identities stay masked.",
   },
   {
     label: "Secured",
-    copy: "Terms are locked, escrow is funded, and identity is revealed only when the deal is safe.",
+    copy: "Terms locked, escrow funded, identity revealed only when the deal is safe.",
   },
   {
     label: "Delivered",
-    copy: "Goods move, delivery is confirmed, funds release, and Trust Scores update. The deal is closed with certainty.",
+    copy: "Goods move, delivery confirmed, funds release, Trust Scores update. Deal closed.",
   },
 ];
 
 const headline = "Trade direct. Settle certain. No unverified hands in between.";
 const subhead =
   "Corridor One X connects verified producers, exporters, and importers directly. AI matching, autonomous settlement, and escrow-secured payment. The deal you agree to is the deal that closes.";
+
+function AmbientBackdrop() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden bg-background">
+      <div className="hero-aura hero-aura-a" />
+      <div className="hero-aura hero-aura-b" />
+      <div className="hero-aura hero-aura-c" />
+    </div>
+  );
+}
 
 function SceneFrame({ progress }: { progress: React.RefObject<number> }) {
   return (
@@ -69,10 +80,71 @@ function StageBlock({ label, copy }: { label: string; copy: string }) {
   );
 }
 
+function Callout({
+  label,
+  copy,
+  side,
+  opacity,
+}: {
+  label: string;
+  copy: string;
+  side: "left" | "right";
+  opacity: number;
+}) {
+  const active = opacity > 0.02;
+  const shift = (1 - opacity) * (side === "right" ? 42 : -42);
+  return (
+    <div
+      aria-hidden={opacity < 0.5}
+      className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out"
+      style={{ opacity, visibility: active ? "visible" : "hidden" }}
+    >
+      <div
+        className="deal-callout absolute top-1/2 -translate-y-1/2"
+        style={{
+          [side === "right" ? "right" : "left"]: "2%",
+          transform: `translate3d(${shift}px, -50%, 0)`,
+          transition: "transform 600ms cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <div className={`flex items-center gap-3 ${side === "right" ? "flex-row-reverse" : ""}`}>
+          {/* bracketed node */}
+          <span className="relative grid size-7 shrink-0 place-items-center">
+            <span className="absolute inset-0 rounded-[3px] border border-accent/70" />
+            <span className="deal-callout-pulse absolute inset-0 rounded-[3px] border border-accent/50" />
+            <XMark className="size-3.5 text-accent" />
+          </span>
+          {/* dotted connector */}
+          <span
+            className={`deal-callout-line h-px w-10 shrink-0 md:w-16 ${side === "right" ? "origin-right" : "origin-left"}`}
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(to right, var(--accent) 0 4px, transparent 4px 9px)",
+            }}
+          />
+          {/* label box */}
+          <div className="deal-callout-box max-w-[15rem] rounded-lg border border-accent/25 bg-card/85 px-4 py-3 backdrop-blur-sm md:max-w-xs">
+            <p className="font-display text-[0.68rem] tracking-[0.02em] text-accent uppercase">{label}</p>
+            <p className="deal-callout-label mt-2 font-sans text-sm leading-relaxed text-secondary-foreground">
+              {copy}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
+const smooth = (v: number) => {
+  const t = clamp(v);
+  return t * t * (3 - 2 * t);
+};
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useRef(0);
-  const [stageF, setStageF] = useState(0);
+  const [p, setP] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -93,9 +165,9 @@ export function Hero() {
       const el = sectionRef.current;
       if (!el) return;
       const total = el.offsetHeight - window.innerHeight;
-      const p = Math.min(Math.max(-el.getBoundingClientRect().top / Math.max(total, 1), 0), 1);
-      progress.current = p;
-      setStageF(p * 4);
+      const v = clamp(-el.getBoundingClientRect().top / Math.max(total, 1));
+      progress.current = v;
+      setP(v);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(compute);
@@ -110,12 +182,22 @@ export function Hero() {
     };
   }, [mobile]);
 
-  const op = (i: number) => Math.min(Math.max(1 - Math.abs(stageF - i) * 2.4, 0), 1);
+  // stage 0 fades out as soon as scrolling starts
+  const op0 = 1 - smooth(p / 0.055);
+
+  // stages 1..4 each own a fifth of the scroll, with a long full-opacity dwell
+  const seg = 1 / 5;
+  const stageOp = (i: number) => {
+    const local = (p - (i + 1) * seg) / seg; // 0..1 within the stage window
+    if (local < 0 || local > 1) return 0;
+    return Math.min(smooth(local / 0.16), smooth((1 - local) / 0.16));
+  };
 
   if (ready && mobile) {
     return (
       <section id="top" className="relative overflow-hidden px-6 pt-32 pb-20">
-        <div className="mx-auto w-full max-w-6xl">
+        <AmbientBackdrop />
+        <div className="relative mx-auto w-full max-w-6xl">
           <h1 className="font-display text-4xl leading-[1.05] font-medium tracking-[-0.04em] text-foreground">
             {headline}
           </h1>
@@ -137,48 +219,50 @@ export function Hero() {
   }
 
   return (
-    <section ref={sectionRef} id="top" className="relative h-[500vh]">
+    <section ref={sectionRef} id="top" className="relative h-[760vh]">
       <div className="sticky top-0 h-screen min-h-[640px] overflow-hidden">
+        <AmbientBackdrop />
+
         <div className="absolute inset-y-0 right-0 w-full md:w-[58%]">
           <SceneFrame progress={progress} />
         </div>
 
         <div className="relative mx-auto flex h-full w-full max-w-6xl items-center px-6">
-          <div className="relative w-full max-w-xl">
-            <div
-              className="transition-opacity duration-300"
-              style={{ opacity: op(0), pointerEvents: op(0) > 0.5 ? "auto" : "none" }}
+          <div
+            className="relative w-full max-w-xl"
+            style={{ opacity: op0, pointerEvents: op0 > 0.5 ? "auto" : "none" }}
+          >
+            <h1 className="hero-line font-display text-4xl leading-[1.04] font-medium tracking-[-0.04em] text-foreground sm:text-5xl lg:text-6xl">
+              {headline}
+            </h1>
+            <p
+              className="hero-line mt-8 max-w-lg font-sans text-base leading-relaxed text-secondary-foreground"
+              style={{ animationDelay: "220ms" }}
             >
-              <h1 className="hero-line font-display text-4xl leading-[1.04] font-medium tracking-[-0.04em] text-foreground sm:text-5xl lg:text-6xl">
-                {headline}
-              </h1>
-              <p
-                className="hero-line mt-8 max-w-lg font-sans text-base leading-relaxed text-secondary-foreground"
-                style={{ animationDelay: "220ms" }}
-              >
-                {subhead}
-              </p>
-              <div className="hero-line mt-10" style={{ animationDelay: "340ms" }}>
-                <HeroCta />
-              </div>
+              {subhead}
+            </p>
+            <div className="hero-line mt-10" style={{ animationDelay: "340ms" }}>
+              <HeroCta />
             </div>
-
-            {stages.map((s, i) => (
-              <div
-                key={s.label}
-                className="absolute inset-x-0 top-1/2 -translate-y-1/2 transition-opacity duration-300"
-                style={{ opacity: op(i + 1) }}
-                aria-hidden={op(i + 1) < 0.5}
-              >
-                <StageBlock {...s} />
-              </div>
-            ))}
           </div>
+        </div>
+
+        {/* stage callouts attached to the container */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] mx-auto max-w-7xl px-6">
+          {stages.map((s, i) => (
+            <Callout
+              key={s.label}
+              label={s.label}
+              copy={s.copy}
+              side={i % 2 === 0 ? "right" : "left"}
+              opacity={stageOp(i)}
+            />
+          ))}
         </div>
 
         <div
           className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 transition-opacity duration-300"
-          style={{ opacity: op(0) }}
+          style={{ opacity: op0 }}
         >
           <span className="font-display text-[0.68rem] tracking-[0.02em] text-muted-foreground uppercase">Scroll</span>
           <span className="relative h-10 w-px bg-border">
