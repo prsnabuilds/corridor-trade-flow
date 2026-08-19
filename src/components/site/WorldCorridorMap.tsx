@@ -9,7 +9,7 @@ const hubs = data.hubs as unknown as Record<string, [number, number]>;
 const width = 120;
 const height = 60;
 
-const tone = ["var(--border)", "color-mix(in oklab, var(--accent) 34%, var(--border))", "var(--accent)"];
+const tone = ["var(--border)", "color-mix(in oklab, var(--accent) 62%, var(--border))", "var(--accent)"];
 
 export function WorldCorridorMap() {
   const { ref, inView } = useInView<HTMLDivElement>(0.15);
