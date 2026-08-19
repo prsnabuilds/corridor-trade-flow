@@ -291,7 +291,7 @@ export function Hero() {
 
         {/* stage descriptions on the left side */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] mx-auto max-w-7xl px-6">
-          {stages.map((s) => (
+          {stages.map((s, i) => (
             <StageDescription
               key={`desc-${s.label}`}
               label={s.label}
