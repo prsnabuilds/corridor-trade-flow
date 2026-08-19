@@ -24,7 +24,7 @@ function Container({ progress }: { progress: RefObject<number> }) {
     });
     const size = new Box3().setFromObject(scene).getSize(new Vector3());
     const max = Math.max(size.x, size.y, size.z) || 1;
-    return 2.35 / max;
+    return 1.7 / max;
   }, [scene]);
 
 
