@@ -283,27 +283,23 @@ export function Hero() {
             <StageCallout
               key={`callout-${s.label}`}
               label={s.label}
-              side={i % 2 === 0 ? "right" : "left"}
+              side="right"
               opacity={stageOp(i)}
             />
           ))}
         </div>
 
-        {/* stage descriptions on the opposite side */}
+        {/* stage descriptions on the left side */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] mx-auto max-w-7xl px-6">
-          {stages.map((s, i) => {
-            const calloutSide = i % 2 === 0 ? "right" : "left";
-            const descSide = calloutSide === "right" ? "left" : "right";
-            return (
-              <StageDescription
-                key={`desc-${s.label}`}
-                label={s.label}
-                copy={s.copy}
-                side={descSide}
-                opacity={stageOp(i)}
-              />
-            );
-          })}
+          {stages.map((s) => (
+            <StageDescription
+              key={`desc-${s.label}`}
+              label={s.label}
+              copy={s.copy}
+              side="left"
+              opacity={stageOp(i)}
+            />
+          ))}
         </div>
 
         <div
