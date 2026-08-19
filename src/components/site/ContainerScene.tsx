@@ -54,7 +54,7 @@ export default function ContainerScene({ progress }: { progress: RefObject<numbe
       <directionalLight position={[-5, 2, -3]} intensity={0.7} />
       <pointLight position={[-3, 1.5, 3]} intensity={18} distance={14} color="#C4D82E" />
       <Suspense fallback={null}>
-        <group scale={2.1}>
+        <group scale={1}>
           <Container progress={progress} />
         </group>
       </Suspense>
