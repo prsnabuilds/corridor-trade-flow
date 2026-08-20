@@ -1,6 +1,7 @@
-export function XMark({ className = "" }: { className?: string }) {
+export function XMark({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 18 18" fill="none" className={className} aria-hidden>
+    <svg viewBox="0 0 18 18" fill="none" className={className} style={style} aria-hidden>
+
       <path
         d="M16.1341 1.35123L10.6643 4.88673C9.6445 5.54589 8.33295 5.5459 7.31314 4.88673L1.84338 1.35123L2.71685 0L8.18656 3.53545C8.67479 3.85102 9.30267 3.85101 9.7909 3.53545L15.2607 0L16.1341 1.35123Z"
         fill="currentColor"
