@@ -41,6 +41,47 @@ function Overlay() {
   );
 }
 
+const CALLOUTS = [
+  { label: "Verified", at: 0.5, x: "58%", y: "38%" },
+  { label: "Matched", at: 0.66, x: "72%", y: "55%" },
+  { label: "Secured", at: 0.82, x: "62%", y: "70%" },
+];
+
+function WireCallout({
+  label,
+  x,
+  y,
+  progress,
+}: {
+  label: string;
+  x: string;
+  y: string;
+  progress: number;
+}) {
+  const o = clamp(progress);
+  return (
+    <div
+      className="pointer-events-none absolute flex items-center gap-0 transition-opacity duration-500"
+      style={{ left: x, top: y, opacity: o, transform: `translate(-4px, -50%)` }}
+    >
+      <span className="relative flex h-2 w-2 shrink-0 items-center justify-center">
+        <span className="absolute h-2 w-2 rounded-full bg-accent" />
+        <span className="deal-callout-pulse absolute h-2 w-2 rounded-full bg-accent" />
+      </span>
+      <span
+        className="h-px bg-accent/70 origin-left transition-transform duration-700"
+        style={{ width: 44, transform: `scaleX(${o})` }}
+      />
+      <span
+        className="ml-2 font-display text-[0.68rem] tracking-[0.02em] whitespace-nowrap text-accent uppercase transition-transform duration-500"
+        style={{ transform: `translateX(${(1 - o) * 8}px)` }}
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
 function HeroCopy({ subheadOpacity }: { subheadOpacity: number }) {
   return (
     <div className="relative mx-auto flex h-full w-full max-w-6xl items-center px-6">
