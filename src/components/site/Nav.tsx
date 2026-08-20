@@ -37,9 +37,9 @@ export function Nav() {
         scrolled ? "border-b border-border bg-background/85 backdrop-blur-xl" : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-18 w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
+      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:h-18 sm:gap-6 sm:px-6 sm:py-4">
         <a href="#top" className="flex items-center" aria-label="Corridor One X home">
-          <img src={logo} alt="Corridor One X" className="h-6 w-auto md:h-7" />
+          <img src={logo} alt="Corridor One X" className="h-5 w-auto sm:h-6 md:h-7" />
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">
@@ -58,7 +58,7 @@ export function Nav() {
         <div className="flex items-center gap-3">
           <a
             href="#book-a-demo"
-            className="rounded-md bg-accent px-4 py-2 font-display text-sm font-medium tracking-tight text-accent-foreground transition-colors hover:bg-accent-hover active:bg-accent-pressed"
+            className="rounded-md bg-accent px-3 py-2 font-display text-[0.8rem] font-medium tracking-tight text-accent-foreground transition-colors hover:bg-accent-hover active:bg-accent-pressed sm:px-4 sm:text-sm"
           >
             Book a Demo
           </a>
@@ -66,7 +66,7 @@ export function Nav() {
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-md border border-border text-foreground lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-md border border-border text-foreground lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -81,7 +81,7 @@ export function Nav() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 font-sans text-sm text-secondary-foreground"
+                  className="block py-4 font-sans text-base text-secondary-foreground"
                 >
                   {l.label}
                 </a>

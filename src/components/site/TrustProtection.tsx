@@ -68,7 +68,7 @@ function TrustScoreCard() {
 
 export function TrustProtection() {
   return (
-    <section id="trust" className="relative overflow-hidden bg-light-surface px-6 py-24 text-ink md:py-32">
+    <section id="trust" className="relative overflow-hidden bg-light-surface px-5 py-20 text-ink sm:px-6 sm:py-24 md:py-32">
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-3xl">
           <Reveal>

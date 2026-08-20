@@ -6,7 +6,7 @@ export function FinalCta() {
   return (
     <section
       id="book-a-demo"
-      className="corridor-glow glow-animate relative overflow-hidden px-6 py-32 md:py-44"
+      className="corridor-glow glow-animate relative overflow-hidden px-5 py-24 sm:px-6 sm:py-32 md:py-44"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Parallax speed={0.35} className="absolute -inset-y-[30%] inset-x-0">

@@ -24,12 +24,15 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
   const [autoRotate, setAutoRotate] = useState(true);
   const [pulseEffect, setPulseEffect] = useState<Record<number, boolean>>({});
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
-  const [radius, setRadius] = useState(200);
+  const [radius, setRadius] = useState(120);
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const compute = () => setRadius(window.innerWidth < 640 ? 125 : window.innerWidth < 1024 ? 170 : 215);
+    const compute = () => {
+      const w = window.innerWidth;
+      setRadius(w < 640 ? Math.max(88, Math.min(120, (w - 170) / 2)) : w < 1024 ? 170 : 215);
+    };
     compute();
     window.addEventListener("resize", compute);
     return () => window.removeEventListener("resize", compute);
@@ -98,7 +101,7 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
     <div
       ref={containerRef}
       onClick={handleContainerClick}
-      className="relative flex h-[560px] w-full items-center justify-center overflow-hidden sm:h-[640px] lg:h-[720px]"
+      className="relative flex h-[470px] w-full items-center justify-center overflow-hidden sm:h-[640px] lg:h-[720px]"
     >
       <div ref={orbitRef} className="relative flex h-full w-full items-center justify-center">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -161,7 +164,7 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
                 </div>
 
                 {isExpanded && (
-                  <Card className="absolute left-1/2 top-12 w-72 -translate-x-1/2 gap-0 border-accent/30 bg-elevated/95 py-0 text-left shadow-xl backdrop-blur-md">
+                  <Card className="absolute left-1/2 top-12 w-[min(17rem,74vw)] -translate-x-1/2 gap-0 border-accent/30 bg-elevated/95 py-0 text-left shadow-xl backdrop-blur-md">
                     <div className="absolute -top-3 left-1/2 h-3 w-px -translate-x-1/2 bg-accent/50" />
                     <CardHeader className="gap-2 px-5 pt-5">
                       <CardTitle className="font-display text-base leading-snug font-medium tracking-tight text-foreground">
