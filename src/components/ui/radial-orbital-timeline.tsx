@@ -24,7 +24,7 @@ export default function RadialOrbitalTimeline({ timelineData, centerNode }: Radi
   const [autoRotate, setAutoRotate] = useState(true);
   const [pulseEffect, setPulseEffect] = useState<Record<number, boolean>>({});
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
-  const [radius, setRadius] = useState(200);
+  const [radius, setRadius] = useState(120);
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
 
