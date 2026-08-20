@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ElementType, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentType, type MouseEvent, type ReactNode } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface TimelineItem {
@@ -7,7 +7,7 @@ export interface TimelineItem {
   date: string;
   content: string;
   category: string;
-  icon: ElementType;
+  icon: ComponentType<{ className?: string; strokeWidth?: number }>;
   relatedIds: number[];
   status: "completed" | "in-progress" | "pending";
   energy: number;
