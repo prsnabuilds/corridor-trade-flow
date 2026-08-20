@@ -83,7 +83,7 @@ export function Logistics() {
                   Active now
                 </p>
                 <p className="mt-3 flex items-center gap-3 font-display text-base tracking-tight text-foreground">
-                  <span aria-hidden className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  <span aria-hidden className="h-2 w-2 shrink-0 rounded-full" style={{ background: "#9CAD1F" }} />
                   India · Middle East · Africa
                 </p>
               </div>
@@ -94,7 +94,8 @@ export function Logistics() {
                 <p className="mt-3 flex items-center gap-3 font-display text-base tracking-tight text-secondary-foreground">
                   <span
                     aria-hidden
-                    className="h-2 w-2 shrink-0 rounded-full border border-accent/50 bg-transparent"
+                    className="h-2 w-2 shrink-0 rounded-full bg-transparent"
+                    style={{ border: "1px solid #5E6B2A" }}
                   />
                   Europe · Australia
                 </p>
