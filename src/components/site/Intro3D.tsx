@@ -76,20 +76,14 @@ export function Intro3D() {
           ) : (
             <div className="grid h-full w-full place-items-center">
               <XMark
-                className="h-24 w-24 text-accent transition-transform"
-                // scale/rotate fallback for mobile & reduced motion
+                className="h-24 w-24 text-accent"
+                style={{ transform: `scale(${1 + p * 2.4}) rotate(${p * 90}deg)` }}
               />
             </div>
           )}
         </div>
 
-        {mobile && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 grid place-items-center"
-            style={{ opacity: 0 }}
-          />
-        )}
+
 
         <div
           className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 transition-opacity duration-300"
