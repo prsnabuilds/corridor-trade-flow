@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import heroVideo from "@/assets/hero-scrub.mp4";
+import heroVideoAsset from "@/assets/hero-scrub.mp4.asset.json";
+
+const heroVideo = heroVideoAsset.url;
 
 const headline = "Trade direct. Settle certain. No unverified hands in between.";
 const subhead =
