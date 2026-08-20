@@ -206,6 +206,18 @@ export function Hero() {
         />
         <Overlay />
 
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          {CALLOUTS.map((c) => (
+            <WireCallout
+              key={c.label}
+              label={c.label}
+              x={c.x}
+              y={c.y}
+              progress={clamp((p - c.at) / 0.09)}
+            />
+          ))}
+        </div>
+
         <div className="relative h-full">
           <HeroCopy subheadOpacity={subheadOpacity} />
         </div>
