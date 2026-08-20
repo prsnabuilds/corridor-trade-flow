@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import heroVideo from "@/assets/hero-scrub.mp4";
+import heroVideoAsset from "@/assets/hero-scrub.mp4.asset.json";
+
+const heroVideo = heroVideoAsset.url;
 
 const headline = "Trade direct. Settle certain. No unverified hands in between.";
 const subhead =
@@ -41,10 +43,12 @@ function Overlay() {
   );
 }
 
+// Anchored to the stacked containers on deck (cargo runs diagonally
+// from upper-left to lower-right of the ship in the wireframe state).
 const CALLOUTS = [
-  { label: "Verified", at: 0.5, x: "58%", y: "38%" },
-  { label: "Matched", at: 0.66, x: "72%", y: "55%" },
-  { label: "Secured", at: 0.82, x: "62%", y: "70%" },
+  { label: "Verified", at: 0.56, x: "56%", y: "17%" },
+  { label: "Matched", at: 0.68, x: "64%", y: "32%" },
+  { label: "Secured", at: 0.8, x: "72%", y: "49%" },
 ];
 
 function WireCallout({
