@@ -9,6 +9,7 @@ const height = 106;
 
 const points = (data.points as Dot[]).filter((p) => p.y <= height);
 const hubs = data.hubs as unknown as Record<string, Hub>;
+const hub = (id: string): Hub => hubs[id] ?? [0, 0];
 
 const active: { id: string; label: string }[] = [
   { id: "uae", label: "UAE" },
@@ -36,7 +37,7 @@ function arc([x1, y1]: Hub, [x2, y2]: Hub) {
 
 export function WorldCorridorMap() {
   const { ref, inView } = useInView<HTMLDivElement>(0.15);
-  const origin = hubs["india"];
+  const origin = hub("india");
 
   return (
     <div ref={ref} className="relative w-full">
@@ -66,7 +67,7 @@ export function WorldCorridorMap() {
         {soon.map((h, i) => (
           <path
             key={h.id}
-            d={arc(origin, hubs[h.id])}
+            d={arc(origin, hub(h.id))}
             fill="none"
             stroke="var(--accent)"
             strokeWidth={0.22}
@@ -78,7 +79,7 @@ export function WorldCorridorMap() {
 
         {/* active routes */}
         {active.map((h, i) => {
-          const d = arc(origin, hubs[h.id]);
+          const d = arc(origin, hub(h.id));
           return (
             <g key={h.id}>
               <path
@@ -124,8 +125,8 @@ export function WorldCorridorMap() {
         {soon.map((h) => (
           <circle
             key={h.id}
-            cx={hubs[h.id][0]}
-            cy={hubs[h.id][1]}
+            cx={hub(h.id)[0]}
+            cy={hub(h.id)[1]}
             r={0.85}
             fill="none"
             stroke="var(--accent)"
@@ -139,8 +140,8 @@ export function WorldCorridorMap() {
         {[{ id: "india", label: "India" }, ...active].map((h) => (
           <circle
             key={h.id}
-            cx={hubs[h.id][0]}
-            cy={hubs[h.id][1]}
+            cx={hub(h.id)[0]}
+            cy={hub(h.id)[1]}
             r={h.id === "india" ? 1.05 : 0.85}
             fill="var(--accent)"
             opacity={inView ? 1 : 0}
