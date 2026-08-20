@@ -41,7 +41,7 @@ function XModel({ progress }: { progress: React.MutableRefObject<number> }) {
     const p = progress.current;
     g.rotation.y += delta * 0.4 + p * delta * 6;
     g.rotation.x = p * 0.5;
-    const s = 1 + p * p * 5;
+    const s = 1 + p * p * 2.4;
     g.scale.setScalar(s);
   });
 

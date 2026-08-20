@@ -47,7 +47,7 @@ export function Intro3D() {
     };
   }, []);
 
-  const opacity = 1 - clamp((p - 0.35) / 0.5);
+  const opacity = 1 - clamp((p - 0.25) / 0.45);
 
   return (
     <section ref={sectionRef} className="relative h-[200vh] bg-background">
