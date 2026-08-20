@@ -9,7 +9,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-14">
+    <footer className="border-t border-border px-5 py-12 sm:px-6 sm:py-14">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 md:flex-row md:items-start md:justify-between">
         <div className="max-w-sm">
           <img src={logo} alt="Corridor One X" className="h-6 w-auto" />
