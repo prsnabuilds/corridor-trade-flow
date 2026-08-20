@@ -7,9 +7,6 @@ const subhead =
 
 const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
 
-/** Portion of the hero scroll spent flying through the logo's negative space. */
-const PORTAL_END = 0.26;
-
 function HeroCta() {
   return (
     <a
@@ -41,60 +38,6 @@ function Overlay() {
         }}
       />
     </>
-  );
-}
-
-/** Interior negative space of the Corridor One X mark (centred on 0,0). */
-const HOLE =
-  "M0 -4.1 C0.5 -1.4 1.4 -0.5 4.1 0 C1.4 0.5 0.5 1.4 0 4.1 C-0.5 1.4 -1.4 0.5 -4.1 0 C-1.4 -0.5 -0.5 -1.4 0 -4.1 Z";
-
-const ARMS = [
-  "M16.1341 1.35123L10.6643 4.88673C9.6445 5.54589 8.33295 5.5459 7.31314 4.88673L1.84338 1.35123L2.71685 0L8.18656 3.53545C8.67479 3.85102 9.30267 3.85101 9.7909 3.53545L15.2607 0L16.1341 1.35123Z",
-  "M1.84358 16.6302L7.31334 13.0947C8.33316 12.4356 9.64471 12.4355 10.6645 13.0947L16.1343 16.6302L15.2608 17.9814L9.7911 14.446C9.30288 14.1304 8.67499 14.1304 8.18676 14.446L2.717 17.9814L1.84358 16.6302Z",
-  "M16.6281 16.1351L13.0926 10.6653C12.4335 9.64548 12.4335 8.33393 13.0926 7.31412L16.6281 1.84436L17.9794 2.71783L14.4439 8.18754C14.1284 8.67576 14.1284 9.30365 14.4439 9.79188L17.9794 15.2616L16.6281 16.1351Z",
-  "M1.35148 1.84615L4.88698 7.31591C5.54614 8.33572 5.54614 9.64727 4.88698 10.6671L1.35148 16.1368L0.000244179 15.2634L3.53569 9.79367C3.85126 9.30544 3.85126 8.67755 3.53569 8.18932L0.000244727 2.71957L1.35148 1.84615Z",
-];
-
-/**
- * Full-bleed dark plate with the mark's negative space punched out. Scaling the
- * group up reads as the camera flying through the opening into the hero.
- */
-function Portal({ progress }: { progress: number }) {
-  const k = Math.pow(70, progress);
-  const armOpacity = 1 - clamp((progress - 0.55) / 0.35);
-
-  if (progress >= 1) return null;
-
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-30">
-      <svg
-        viewBox="-100 -100 200 200"
-        preserveAspectRatio="xMidYMid slice"
-        className="h-full w-full"
-      >
-        <defs>
-          <mask id="portal-mask" maskUnits="userSpaceOnUse" x="-100" y="-100" width="200" height="200">
-            <rect x="-100" y="-100" width="200" height="200" fill="#fff" />
-            <g transform={`scale(${k})`}>
-              <path d={HOLE} fill="#000" />
-            </g>
-          </mask>
-        </defs>
-        <rect
-          x="-100"
-          y="-100"
-          width="200"
-          height="200"
-          fill="var(--background)"
-          mask="url(#portal-mask)"
-        />
-        <g transform={`scale(${k}) translate(-9 -9)`} opacity={armOpacity}>
-          {ARMS.map((d) => (
-            <path key={d.slice(0, 12)} d={d} fill="var(--accent)" />
-          ))}
-        </g>
-      </svg>
-    </div>
   );
 }
 
@@ -193,7 +136,7 @@ export function Hero() {
       if (!el) return;
       const total = el.offsetHeight - window.innerHeight;
       const v = clamp(-el.getBoundingClientRect().top / Math.max(total, 1));
-      target.current = clamp((v - PORTAL_END) / (1 - PORTAL_END));
+      target.current = v;
       setP(v);
     };
     const onScroll = () => {
@@ -233,10 +176,8 @@ export function Hero() {
     return () => cancelAnimationFrame(raf);
   }, [mobile]);
 
-  const portal = clamp(p / PORTAL_END);
-  const scrub = clamp((p - PORTAL_END) / (1 - PORTAL_END));
+  const scrub = p;
   const subheadOpacity = 1 - clamp((scrub - 0.25) / 0.35) * 0.9;
-  const copyOpacity = clamp((portal - 0.6) / 0.35);
 
   if (ready && mobile) {
     return (
@@ -259,7 +200,7 @@ export function Hero() {
   }
 
   return (
-    <section ref={sectionRef} id="top" className="relative h-[420vh]">
+    <section ref={sectionRef} id="top" className="relative h-[300vh]">
       <div className="sticky top-0 h-screen min-h-[640px] overflow-hidden bg-background">
         <video
           ref={videoRef}
@@ -284,10 +225,8 @@ export function Hero() {
         </div>
 
         <div className="relative h-full">
-          <HeroCopy subheadOpacity={subheadOpacity} opacity={copyOpacity} />
+          <HeroCopy subheadOpacity={subheadOpacity} />
         </div>
-
-        <Portal progress={portal} />
 
         <div
           className="pointer-events-none absolute inset-x-0 bottom-8 z-40 flex flex-col items-center gap-2 transition-opacity duration-300"
