@@ -35,7 +35,9 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Nav />
+      <Intro3D />
       <Hero />
+
       <main className="relative z-10 bg-background">
 
         <Problem />
